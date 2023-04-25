@@ -21,7 +21,7 @@ const CostList = () => {
   return (
     <div>
       {data.map((item) => (
-        <div key={item.id} className='w-[450px] mt-1 flex flex-row mb-6 hover:shadow-lg hover:scale-105 transition-all duration-300 rounded-xl p-4'>
+        <div key={item.id} className='w-[450px] cursor-pointer mt-1 flex flex-row mb-6 hover:shadow-lg hover:scale-105 transition-all hover:bg-slate-200 duration-300 rounded-xl p-4'>
             <div className='leftPart'>
                 <p className='text-base'>{item.desc}</p>
                 <p className='text-black opacity-50 text-sm'>{item.date}</p>
