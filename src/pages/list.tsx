@@ -2,25 +2,27 @@ import { useEffect, useState } from 'react';
 import moment from 'moment';
 
 const CostList = () => {
-  const [data, setData] = useState([]);
+    const [data, setData] = useState([]);
 
-  useEffect(() => {
+    useEffect(() => {
     fetch('http://10.50.188.77:3001/todoscustos')
-      .then((response) => response.json())
-      .then((json) => {
+        .then((response) => response.json())
+        .then((json) => {
         const sortedData = json.sort((a, b) => {
-          const dateA = moment(a.date, 'DD-MM-YYYY').toDate();
-          const dateB = moment(b.date, 'DD-MM-YYYY').toDate();
-          return dateA - dateB;
+            const dateA = moment(a.date, 'DD-MM-YYYY').toDate();
+            const dateB = moment(b.date, 'DD-MM-YYYY').toDate();
+            return dateA - dateB;
         });
         setData(sortedData.reverse());
-      })
-      .catch((error) => console.error('ocorreu um erro', error));
-  }, []);
+        })
+        .catch((error) => console.error('ocorreu um erro', error));
+    }, []);
 
-  return (
+    const lastTenItems = data.slice(-10);
+
+    return (
     <div>
-      {data.map((item) => (
+        {lastTenItems.map((item) => (
         <div key={item.id} className='w-[450px] cursor-pointer mt-1 flex flex-row mb-6 hover:shadow-lg hover:scale-105 transition-all hover:bg-slate-200 duration-300 rounded-xl p-4'>
             <div className='leftPart'>
                 <p className='text-base'>{item.desc}</p>
@@ -29,11 +31,11 @@ const CostList = () => {
             <div className='rightPart ml-auto'>
                 <p className='text-base font-semibold'>R$ {item.preco.toFixed(2)}</p>
             </div>
-          
+            
         </div>
-      ))}
+        ))}
     </div>
-  );
-};
+    );
+    };
 
 export default CostList;

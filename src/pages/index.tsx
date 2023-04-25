@@ -47,7 +47,7 @@ export default function Home() {
             <div className='listSeparator w-[480px] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto mb-5'>
             </div>
             <div className='listItSelf relative h-5/6 w-[500px]'>
-              <div className='listContainer absolute top-0 left-0 flex items-center justify-center right-0 bottom-0 overflow-y-scroll pt-40'>
+              <div className='listContainer absolute top-0 left-0 flex items-center justify-center right-0 bottom-0 overflow-y-scroll pt-60'>
                 <List />
               </div>
             </div>
