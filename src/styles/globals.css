@@ -36,3 +36,7 @@ html {
 .listRender {
     scrollbar-width: none;
 }
+
+.racao, .banho, .shop, .clinica {
+  margin-bottom: 20px;
+}

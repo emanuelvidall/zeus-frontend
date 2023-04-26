@@ -66,9 +66,8 @@ function postData(url, dados) {
         });
     }
 
-
 return (
-    <div className='self-end ml-auto'>
+    <div className='ml-auto'>
     <button
         type="button"
         className="w-[30px] h-[30px] bg-green-600 rounded-full text-white transition-all duration-500 pt-1 ease-in-out hover:scale-110"

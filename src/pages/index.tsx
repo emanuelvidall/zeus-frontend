@@ -4,6 +4,7 @@ import TotalCosts from './totalcosts'
 import List from './list'
 import ImageComponent from './avatar'
 import ModalAdd from './modaladd'
+import Distribuicao from './distribuicao'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -56,6 +57,9 @@ export default function Home() {
           <div className='rightTopContainer flex flex-row'>
             <h1 className='text-xl font-semibold mt-3 opacity-90'>Distribuicao das Despesas</h1>
           </div>
+            <div className='w-[100%] h-[90%] pt-5'>
+              <Distribuicao/>
+            </div>
         </div>
       </div>
       <footer className='absolute bottom-0'>

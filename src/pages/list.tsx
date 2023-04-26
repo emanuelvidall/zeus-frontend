@@ -30,7 +30,6 @@ const CostList = () => {
     return (
     <div className='listRender absolute h-[50%] w-[510px] pl-4 overflow-y-scroll'>
         {lastTenItems.map((item) => {
-        console.log(`Rendering item with ID ${item.id}`);
         return (
         <div key={item.id} className='w-[450px] cursor-pointer mt-1 flex flex-row mb-6 hover:shadow-lg hover:scale-105 transition-all hover:bg-slate-200 duration-300 rounded-xl p-4'>
             <div className='leftPart'>
