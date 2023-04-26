@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css'
 
 const Distribuicao = () => {
     const [racaoTotal, setRacaoTotal] = useState<number | null>(null);
@@ -80,25 +82,25 @@ const Distribuicao = () => {
         <div className='racao container'>
             <h1 className='text-sm font-bold'>Ração</h1>
             <div className='w-[90%] h-2 rounded-xl bg-slate-200'>
-                <div className='h-2 rounded-xl bg-green-500' style={{ width: `${barLenghtRacao}%` }}></div>
+                <div className='h-2 rounded-xl bg-green-500 cursor-pointer' style={{ width: `${barLenghtRacao}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLenghtRacao+'%'}><Tooltip id="my-tooltip" /></div>
             </div>
             </div>
             <div className='banho container'>
             <h1 className='text-sm font-bold'>Banho</h1>
             <div className='w-[90%] h-2 rounded-xl bg-slate-200'>
-                <div className='w-[20%] h-2 rounded-xl bg-green-500' style={{ width: `${barLengthBanho}%` }}></div>
+                <div className='w-[20%] h-2 rounded-xl bg-green-500 cursor-pointer' style={{ width: `${barLengthBanho}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLengthBanho+'%'}><Tooltip id="my-tooltip" /></div>
             </div>
             </div>
             <div className='shop container'>
             <h1 className='text-sm font-bold'>Shop</h1>
             <div className='w-[90%] h-2 rounded-xl bg-slate-200'>
-                <div className='w-[50%] h-2 rounded-xl bg-green-500' style={{ width: `${barLengthShop}%` }}></div>
+                <div className='w-[50%] h-2 rounded-xl bg-green-500 cursor-pointer' style={{ width: `${barLengthShop}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLengthShop+'%'}><Tooltip id="my-tooltip" /></div>
             </div>
             </div>
             <div className='clinica container'>
             <h1 className='text-sm font-bold'>Clínica</h1>
             <div className='w-[90%] h-2 rounded-xl bg-slate-200'>
-                <div className='w-[8%] h-2 rounded-xl bg-green-500' style={{ width: `${barLengthClinica}%` }}></div>
+                <div className='w-[8%] h-2 rounded-xl bg-green-500 cursor-pointer' style={{ width: `${barLengthClinica}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLengthClinica+'%'}><Tooltip id="my-tooltip" /></div>
             </div>
             </div>
             <div className='dicasSave w-[75%] h-[35%] rounded-xl self-center ml-auto mr-auto'>
