@@ -106,7 +106,7 @@ const Distribuicao = () => {
             <div className='dicasSave w-[75%] h-[35%] rounded-xl self-center ml-auto mr-auto'>
             <h1 className='text-sm opacity-50'>Veja as melhores dicas de como cuidar de seu pet no blog</h1>
             <Image src='/images/dicas.png' alt='dicas' width={400} height={400}/>
-            <button className='text-center "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-slate-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 mt-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm hover:scale-110 transition-all duration-300 ease-in-out'>Aumigo Dicas 🐶</button>
+            <button className='text-center w-full inline-flex justify-center rounded-md border border-transparent shadow-sm p-2 pt-3 bg-slate-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 mt-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm hover:scale-110 transition-all duration-300 ease-in-out'>Aumigo Dicas 🐶</button>
             </div>
             </>
     )
