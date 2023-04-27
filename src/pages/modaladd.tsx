@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Type } from 'typescript';
 
 const ModalAdd = () => {
 const [showModal, setShowModal] = useState(false);
@@ -23,11 +22,12 @@ const handleDescChange = (e) => {
 }
 
 const handleDataChange = (e) => {
-    const dateRegex = /^(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[0-2])-\d{2}$/;
-    const input = e.target.value;
-    if (dateRegex.test(input) || input === ''){
-        setData(e.target.value)
-    }
+    // const dateRegex = /^(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[0-2])-\d{2}$/;
+    // const input = e.target.value;
+    // if (dateRegex.test(input) || input === ''){
+        // setData(e.target.value)
+    // }
+    setData(e.target.value)
 }
 
 const handleTipoChange = (e) => {

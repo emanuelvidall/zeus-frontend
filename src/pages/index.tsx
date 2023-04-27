@@ -32,18 +32,18 @@ export default function Home() {
               <h1 className='text-3xl'>Despesas</h1>
               <div className='totalMes flex-end ml-auto'>
                 <TotalCosts />
-                <h1 className='text-sm text-center'>Total neste mes</h1>
+                <h1 className='text-sm text-center'>Neste mês</h1>
               </div>
           </div>
           <div className='chartContainer w-full h-[100px] bg-blue-500 mb-2'>
           </div>
           <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>
             <div className='listContainerHead w-full h-5 mb-2 flex flex-row'>
-              <h3 className='font-semibold'>Historico</h3>
+              <h3 className='font-semibold'>Histórico</h3>
               <ModalAdd />
             </div>
             <div>
-              <h3 className='text-sm'>Ultimas 10 despesas</h3>
+              <h3 className='text-sm'>Últimas 10 despesas</h3>
             </div>
             <div className='listSeparator w-[100%] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto'>
             </div>
@@ -54,8 +54,9 @@ export default function Home() {
           </div>
         </div>
         <div className='rightSection bg-slate-50 h-[90%] w-1/4 rounded-r-xl p-10'>
-          <div className='rightTopContainer flex flex-row'>
-            <h1 className='text-xl font-semibold mt-3 opacity-90'>Distribuicao das Despesas</h1>
+          <div className='rightTopContainer flex flex-col'>
+            <h1 className='text-xl font-semibold mt-3 opacity-90'>Distribuição das Despesas</h1>
+            <h2 className='text-sm text-left'>Total</h2>
           </div>
             <div className='w-[100%] h-[90%] pt-5'>
               <Distribuicao/>
