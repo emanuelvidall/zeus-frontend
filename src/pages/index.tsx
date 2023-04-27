@@ -20,9 +20,9 @@ export default function Home() {
             <h3 className='text-neutral-500 text-base'>32kg</h3>
             <h3 className='text-neutral-500 text-base'>3 anos</h3>
             <div className='listSection mt-20 text-neutral-500 text-2xl space-y-10 flex flex-col'>
-              <a className='hover:text-white cursor-pointer'>Home</a>
+              {/* <a className='hover:text-white cursor-pointer'>Home</a>
               <a className='hover:text-white cursor-pointer'>Despesas</a>
-              <a className='hover:text-white cursor-pointer'>Resumo</a>
+              <a className='hover:text-white cursor-pointer'>Resumo</a> */}
           </div>
           </div>
         </div>
@@ -32,7 +32,7 @@ export default function Home() {
               <h1 className='text-3xl'>Despesas</h1>
               <div className='totalMes flex-end ml-auto'>
                 <TotalCosts />
-                <h1 className='text-sm text-center'>Neste mês</h1>
+                <h1 className='text-sm text-left'>Total</h1>
               </div>
           </div>
           <div className='chartContainer w-full h-[100px] bg-blue-500 mb-2'>
