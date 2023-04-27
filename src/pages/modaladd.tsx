@@ -50,7 +50,7 @@ const url = '/novocusto';
 console.log(JSON.stringify(dados))
 
 function postData(url, dados) {
-    return fetch(`http://10.50.188.105:3001${url}`, {
+    return fetch(`http://10.50.188.123:3001${url}`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'

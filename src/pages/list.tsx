@@ -9,7 +9,7 @@ const CostList = () => {
     console.log('carregando......')
 
     useEffect(() => {
-    fetch('http://10.50.188.105:3001/todoscustos')
+    fetch('http://10.50.188.123:3001/todoscustos')
         .then((response) => response.json())
         .then((json) => {
         const sortedData = json.sort((a, b) => {
@@ -28,10 +28,10 @@ const CostList = () => {
     console.log('dados carregados:...', lastTenItems)
 
     return (
-    <div className='listRender absolute h-[50%] w-[510px] pl-4 overflow-y-scroll'>
+    <div className='listRender absolute h-[50%] w-[40%] pl-4 overflow-y-scroll'>
         {lastTenItems.map((item) => {
         return (
-        <div key={item.id} className='w-[450px] cursor-pointer mt-1 flex flex-row mb-6 hover:shadow-lg hover:scale-105 transition-all hover:bg-slate-200 duration-300 rounded-xl p-4'>
+        <div key={item.id} className='w-[90%] cursor-pointer mt-1 flex flex-row mb-6 hover:shadow-lg hover:scale-105 transition-all hover:bg-slate-200 duration-300 rounded-xl p-4'>
             <div className='leftPart'>
                 <p className='text-base'>{item.desc}</p>
                 <p className='text-black opacity-50 text-sm'>{item.date}</p>

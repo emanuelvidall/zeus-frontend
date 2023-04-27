@@ -37,7 +37,7 @@ export default function Home() {
           </div>
           <div className='chartContainer w-full h-[100px] bg-blue-500 mb-2'>
           </div>
-          <div className='listContainer w-[500px] h-[50%] top-0 pl-5 pr-5'>
+          <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>
             <div className='listContainerHead w-full h-5 mb-2 flex flex-row'>
               <h3 className='font-semibold'>Historico</h3>
               <ModalAdd />
@@ -45,7 +45,7 @@ export default function Home() {
             <div>
               <h3 className='text-sm'>Ultimas 10 despesas</h3>
             </div>
-            <div className='listSeparator w-[480px] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto'>
+            <div className='listSeparator w-[100%] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto'>
             </div>
               <div className=''>
                 <List />
