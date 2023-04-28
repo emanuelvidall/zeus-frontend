@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { myIp } from '.';
 
 interface Cost {
   valor: number;
@@ -10,7 +11,7 @@ const TotalCosts = () => {
   useEffect(() => {
     const getTotalCosts = async () => {
       try {
-        const response = await fetch('http://10.50.188.123:3001/todoscustos', {
+        const response = await fetch(`http://${myIp}:3001/todoscustos`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

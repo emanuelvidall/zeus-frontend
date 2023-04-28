@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css'
+import { myIp } from '.';
 
 const Distribuicao = () => {
     const [racaoTotal, setRacaoTotal] = useState<number | null>(null);
@@ -16,7 +17,7 @@ const Distribuicao = () => {
         console.log('texsttttt')
             const getTotalCosts = async () => {
                 try {
-                const response = await fetch('http://10.50.188.123:3001/todoscustos', {
+                const response = await fetch(`http://${myIp}:3001/todoscustos`, {
                     method: 'GET',
                     headers: {
                     'Content-Type': 'application/json',
@@ -62,6 +63,11 @@ const Distribuicao = () => {
                 }
             };
         getTotalCosts()
+        const intervalId = setInterval(() => {
+            getTotalCosts();
+        }, 2000);
+
+        return () => clearInterval(intervalId);
 
     }, []);
 

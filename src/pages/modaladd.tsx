@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { myIp } from '.';
 
 const ModalAdd = () => {
 const [showModal, setShowModal] = useState(false);
@@ -10,7 +11,7 @@ const [desc, setDesc] = useState('');
 const [data, setData] = useState('');
 const [tipo, setTipo] = useState('');
 const [valor, setValor] = useState(0);
-const [quantidade, setQuantidade] = useState('0');
+const [quantidade, setQuantidade] = useState(0);
 
 
 const handleDescChange = (e) => {
@@ -49,8 +50,13 @@ const url = '/novocusto';
 
 console.log(JSON.stringify(dados))
 
-function postData(url, dados) {
-    return fetch(`http://10.50.188.123:3001${url}`, {
+function postData( url, dados) {
+    
+    if (!dados.desc || !dados.data || !dados.tipo || !dados.valor || !dados.quantidade) {
+    alert('Preencha todo o formulário para adicionar a despesa');
+    return;
+    }
+    return fetch(`http://${myIp}:3001${url}`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -60,6 +66,11 @@ function postData(url, dados) {
         .then(response => {response.json()
         console.log('Success:', response);
         alert('Your message was sent successfully!');
+        setDesc('');
+        setData('')
+        setTipo('')
+        setQuantidade(0)
+        setValor(0)
         })
         .catch(error => {
         console.error(error);

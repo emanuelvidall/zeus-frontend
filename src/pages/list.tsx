@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStethoscope, faBowlRice, faCartShopping, faShower, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { myIp } from '.';
 
 
 const CostList = () => {
@@ -13,7 +14,7 @@ const CostList = () => {
     useEffect(() => {
     const fetchData = async () => {
         try {
-        const response = await fetch('http://10.50.188.123:3001/todoscustos');
+        const response = await fetch(`http://${myIp}:3001/todoscustos`);
         const json = await response.json();
         console.log('response jsoN!', json)
         const sortedData = json.sort((a, b) => {
@@ -31,10 +32,12 @@ const CostList = () => {
     // Fetch data on mount
     fetchData();
 
+    //if lista has empty format try to get a formal decision for the encrypt of every time the transactions has to be done on the way it gets done. If not, try IHC later o lets move forward,  using tailwind css for the trying to not get enought data for the awesome idea so it has more.
+
     // Refresh data every 2 seconds
     const intervalId = setInterval(() => {
         fetchData();
-    }, 1000);
+    }, 2000);
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);

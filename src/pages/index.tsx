@@ -6,6 +6,8 @@ import ImageComponent from './avatar'
 import ModalAdd from './modaladd'
 import Distribuicao from './distribuicao'
 
+export const myIp = '10.50.188.123';
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -17,8 +19,8 @@ export default function Home() {
             <ImageComponent />
             <h1 className='text-zinc-50 text-3xl mt-5 mb-1'>Zeus</h1>
             <h3 className='text-neutral-500 text-base'>Border Collie</h3>
-            <h3 className='text-neutral-500 text-base'>32kg</h3>
-            <h3 className='text-neutral-500 text-base'>3 anos</h3>
+            <h3 className='text-neutral-500 text-base'>18kg</h3>
+            <h3 className='text-neutral-500 text-base'>2 anos</h3>
             <div className='listSection mt-20 text-neutral-500 text-2xl space-y-10 flex flex-col'>
               {/* <a className='hover:text-white cursor-pointer'>Home</a>
               <a className='hover:text-white cursor-pointer'>Despesas</a>
