@@ -5,13 +5,28 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { myIp } from '.';
 
-const ModalAdd = () => {
+const ModalEdit = () => {
 const [showModal, setShowModal] = useState(false);
 const [desc, setDesc] = useState('');
 const [data, setData] = useState('');
 const [tipo, setTipo] = useState('');
 const [valor, setValor] = useState(0);
 const [quantidade, setQuantidade] = useState(0);
+
+ useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://${myIp}:3001/todoscustos/${id}`);
+        const json = await response.json();
+        setData(json);
+      } catch (error) {
+        console.error('An error occurred', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
 
 const handleDescChange = (e) => {
@@ -46,18 +61,18 @@ const handleQuantidadeChange = (e) => {
 }
 
 const dados = {desc, data, tipo, valor, quantidade}
-const url = '/novocusto';
+const url = '/todoscustos';
 
 console.log(JSON.stringify(dados))
 
-function postData( url, dados) {
+function putData( url, dados) {
     
     if (!dados.desc || !dados.data || !dados.tipo || !dados.valor || !dados.quantidade) {
     alert('Preencha todo o formulário para adicionar a despesa');
     return;
     }
-    return fetch(`http://${myIp}:3001${url}`, {
-        method: 'POST',
+    return fetch(`http://${myIp}:3001${url}/id`, {
+        method: 'PUT',
         headers: {
         'Content-Type': 'application/json'
         },
@@ -65,7 +80,7 @@ function postData( url, dados) {
     })
         .then(response => {response.json()
         console.log('Success:', response);
-        alert('Your message was sent successfully!');
+        alert('Edicao realizada com sucesso!');
         setDesc('');
         setData('')
         setTipo('')
@@ -109,7 +124,7 @@ return (
                 <div>
                     <form>
                         <h3 className='text-sm font-semibold opacity-80'>Data (DD-MM-AA)</h3>
-                        <input id='data' type='date'onChange={handleDataChange} className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2' placeholder='data da despesa'></input>
+                        <input id='data' onChange={handleDataChange} className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2' placeholder='data da despesa'></input>
                     </form>
                 </div>
                 <div>
@@ -144,7 +159,7 @@ return (
                     <button
                 type="button"
                 className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm hover:scale-110 transition-all duration-300 ease-in-out mb-2"
-                onClick={() => postData(url,dados)}
+                onClick={() => putData(url,dados)}
                 >
                 Adicionar
                 </button>
@@ -167,4 +182,4 @@ return (
 );
 };
 
-export default ModalAdd;
+export default ModalEdit;
