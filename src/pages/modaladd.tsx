@@ -109,7 +109,7 @@ return (
                 <div>
                     <form>
                         <h3 className='text-sm font-semibold opacity-80'>Data (DD-MM-AA)</h3>
-                        <input id='data' type='date'onChange={handleDataChange} className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2' placeholder='data da despesa'></input>
+                        <input id='desc' onChange={handleDataChange} className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2' placeholder='data'></input>
                     </form>
                 </div>
                 <div>
@@ -118,7 +118,7 @@ return (
                         <div className='flex flex-col'>
                             <select name="tipo" id="tipo" onChange={handleTipoChange} className='w-[165px] h-[100] border-2 rounded-md mt-1 mb-2 bg-white p-1'>
                                 <option value="" disabled selected style={{ display: "none" }}>
-                                    <span style={{ opacity: 0.5 }}>Select a type</span>
+                                    <span style={{ opacity: 0.5 }}>Escolha o tipo</span>
                                 </option>
                                 <option value="racao">Racao</option>
                                 <option value="banho">Banho</option>
