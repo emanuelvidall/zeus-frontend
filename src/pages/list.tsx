@@ -56,7 +56,7 @@ const CostList = () => {
         {lastTenItems.map((item, index) => {
 
         const handleDelete = () => {
-            fetch(`http://10.50.188.123:3001/costs/${item._id}`, {
+            fetch(`http://${myIp}:3001/costs/${item._id}`, {
             method: "DELETE",
             })
             .then((response) => response.json())

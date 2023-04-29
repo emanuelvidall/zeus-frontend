@@ -6,7 +6,7 @@ import ImageComponent from './avatar'
 import ModalAdd from './modaladd'
 import Distribuicao from './distribuicao'
 
-export const myIp = '10.50.188.123';
+export const myIp = '192.168.0.16';
 
 const inter = Inter({ subsets: ['latin'] })
 
