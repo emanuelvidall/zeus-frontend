@@ -5,6 +5,7 @@ import List from './list'
 import ImageComponent from './avatar'
 import ModalAdd from './modaladd'
 import Distribuicao from './distribuicao'
+import Barras from './chart'
 
 export const myIp = '192.168.0.16';
 
@@ -37,7 +38,8 @@ export default function Home() {
                 <h1 className='text-sm text-left'>Total</h1>
               </div>
           </div>
-          <div className='chartContainer w-full h-[100px] bg-blue-500 mb-2'>
+          <div className='chartContainer w-full h-[200px] mb-2'>
+            <Barras/>
           </div>
           <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>
             <div className='listContainerHead w-full h-5 mb-2 flex flex-row'>

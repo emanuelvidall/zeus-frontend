@@ -1,38 +1,88 @@
-import React, { useState, useEffect } from "react";
-import { Bar } from "react-chartjs-2";
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel, VictoryTooltip } from 'victory';
+import moment from 'moment'; // You need to import 'moment' for it to work
+import { myIp } from '.';
 
-const BarChart = () => {
-  const [chartData, setChartData] = useState({});
-
-  const chart = () => {
-    setChartData({
-      labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      datasets: [
-        {
-          label: "Sales",
-          data: [32, 45, 12, 76, 69],
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.6)",
-            "rgba(54, 162, 235, 0.6)",
-            "rgba(255, 206, 86, 0.6)",
-            "rgba(75, 192, 192, 0.6)",
-            "rgba(153, 102, 255, 0.6)",
-          ],
-          borderWidth: 4,
-        },
-      ],
-    });
-  };
+const Barras = () => {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    chart();
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://${myIp}:3001/todoscustos`);
+        const json = await response.json();
+        console.log('RESPOSTA BARRRAAAAAAAA', json);
+
+        const monthlyData = json.reduce((accumulator, item) => {
+          const month = moment(item.data, 'DD-MM-YYYY').month();
+          if (!accumulator[month]) {
+            accumulator[month] = {
+              month: month + 1, // Add 1 to the month, as moment.js month starts from 0
+              valor: 0,
+            };
+          }
+          accumulator[month].valor += item.valor;
+          return accumulator;
+        }, {});
+
+        const monthlyDataArray = Object.values(monthlyData);
+        setData(monthlyDataArray);
+        console.log('monthlydatarray____________________', monthlyDataArray)
+        console.log(monthlyDataArray);
+      } catch (error) {
+        console.error('An error occurred', error);
+      }
+    };
+
+    fetchData();
+
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 2000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
-    <div>
-      <Bar data={chartData} />
-    </div>
+    <>
+      {data.length > 0 && (
+        <div className='h-full w-full relative'>
+          <VictoryChart padding={{ top: 10, bottom: 50, left: 5, right: 5 }} width={1500} height={500}
+          >
+            <VictoryAxis
+                        
+                        tickValues={['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']}
+                        domain={[0, 13]}
+                        tickLabelComponent={<VictoryLabel style={{ fontSize: 30, fontFamily: 'Helvetica' }} />}
+          />
+              <VictoryBar barRatio={1} alignment="middle" labelComponent={
+                <VictoryTooltip
+                  style={{
+                    fontFamily: 'ReadexPro-Medium',
+                    fontSize: 30,
+                  }}
+                />
+              } labels={({ datum }) => `R$${datum.valor}`} style={
+                {data: { 
+                  fill: "#1e2229", 
+                   
+                },
+                
+              }
+            }cornerRadius={6} barWidth={50}
+            
+            data={data}
+                // data accessor for x values
+                x="month"
+                // data accessor for y values
+                y="valor"
+              />
+          </VictoryChart>
+          </div>
+        )}
+    </>
   );
 };
 
-export default BarChart;
+export default Barras;
