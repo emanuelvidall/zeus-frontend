@@ -4,6 +4,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { myIp } from '.';
+import CustomDatePicker from './datepicker';
+import { isNumericLiteral } from 'typescript';
 
 const ModalAdd = () => {
 const [showModal, setShowModal] = useState(false);
@@ -12,23 +14,21 @@ const [data, setData] = useState('');
 const [tipo, setTipo] = useState('');
 const [valor, setValor] = useState(0);
 const [quantidade, setQuantidade] = useState(0);
+const currentDate = new Date();
 
 
 const handleDescChange = (e) => {
-    const regex = /^[a-zA-Z0-9]+$/; // Regular expression to match letters and numbers
-    const input = e.target.value;
-    if (regex.test(input) || input === '') {
-        setDesc(e.target.value);
-    }
+    setDesc(e.target.value);
 }
 
-const handleDataChange = (e) => {
-    // const dateRegex = /^(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[0-2])-\d{2}$/;
-    // const input = e.target.value;
-    // if (dateRegex.test(input) || input === ''){
-        // setData(e.target.value)
-    // }
-    setData(e.target.value)
+const handleDataChange = (date) => {
+    const formattedDate = date.toLocaleString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+    })
+    console.log('data aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', formattedDate)
+    setData(formattedDate.replace(/\//g, '-'))
 }
 
 const handleTipoChange = (e) => {
@@ -44,6 +44,10 @@ const handleValorChange = (e) => {
 const handleQuantidadeChange = (e) => {
     setQuantidade(e.target.value)
 }
+
+useState(() => {
+    handleDataChange(currentDate);
+  }, []);
 
 const dados = {desc, data, tipo, valor, quantidade}
 const url = '/novocusto';
@@ -109,7 +113,10 @@ return (
                 <div>
                     <form>
                         <h3 className='text-sm font-semibold opacity-80'>Data (DD-MM-AA)</h3>
-                        <input id='desc' onChange={handleDataChange} className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2' placeholder='data'></input>
+                        <div className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2'>
+                            <CustomDatePicker onChange={handleDataChange} />
+                        </div>
+                        {/* <input id='desc' onChange={handleDataChange} className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2' placeholder='data'></input> */}
                     </form>
                 </div>
                 <div>
