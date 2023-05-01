@@ -44,6 +44,11 @@ const Barras = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+  const currentDate = new Date();
+  const currentMonthIndex = currentDate.getMonth()+1
+  const monthNames = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  const currentMonth = monthNames[currentMonthIndex];
+
   return (
     <>
       {data.length > 0 && (
@@ -51,23 +56,20 @@ const Barras = () => {
           <VictoryChart padding={{ top: 10, bottom: 50, left: 5, right: 5 }} width={1500} height={500}
           >
             <VictoryAxis
-                        
+                        style={{axis:{stroke:'none'}}}
                         tickValues={['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']}
                         domain={[0, 13]}
-                        tickLabelComponent={<VictoryLabel style={{ fontSize: 30, fontFamily: 'Helvetica' }} />}
+                        tickLabelComponent={<VictoryLabel style={{ fontSize: 30, fontFamily: 'sans-serif', }} />}
           />
-              <VictoryBar barRatio={1} alignment="middle" labelComponent={
-                <VictoryTooltip
-                  style={{
-                    fontFamily: 'ReadexPro-Medium',
-                    fontSize: 30,
-                  }}
-                />
-              } labels={({ datum }) => `R$${datum.valor}`} style={
-                {data: { 
-                  fill: "#1e2229", 
-                   
-                },
+              <VictoryBar barRatio={1} alignment="middle" labelComponent={<VictoryTooltip flyoutPadding={33}/>}
+              labels={({ datum }) => `R$${datum.valor}`} style={
+                {data: {
+                  fill: ({ datum }) => (datum.month === currentMonthIndex ? '#65A30D' : '#1e2229'),
+                }, labels: {
+                  fontFamily: 'sans-serif',
+                  fontSize: 30,
+                  fontWeight: 'bold',
+                } 
                 
               }
             }cornerRadius={6} barWidth={50}

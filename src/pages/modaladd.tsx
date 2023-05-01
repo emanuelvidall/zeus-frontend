@@ -89,20 +89,19 @@ return (
         onClick={() => setShowModal(true)}><FontAwesomeIcon icon={faPlus} /></button>
 
     {showModal && (
-        <div className="fixed z-10 inset-0 overflow-y-hidden">
-        <div className="flex items-center justify-center min-h-screen px-4 pt-32 pb-20 text-center sm:block sm:p-0">
-            <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div className="w-[100%] z-10 h-[100%] bg-red-500 absolute top-0 left-0">
+        {/* <div className="flex items-center justify-center min-h-screen px-4 pt-32 pb-20 text-center sm:block sm:p-0"> */}
+            {/* <div className="fixed inset-0 transition-opacity" aria-hidden="true">
             <div className="absolute inset-0 bg-gray-500 opacity-75 rounded-xl"></div>
             </div>
 
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-            <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"> */}
+            <div className="bg-white h-1/3 w-1/3 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">Adicione uma nova despesa 💸 </h3>
 
                 <div className="mt-4 space-y-4 flex flex-row">
                 
                 </div>
-            </div>
             <div className='justify-center flex flex-col items-center'>
                 <div>
                     <form>
@@ -123,7 +122,7 @@ return (
                     <form>
                         <h3 className='text-sm font-semibold opacity-80'>Tipo</h3>
                         <div className='flex flex-col'>
-                            <select name="tipo" id="tipo" onChange={handleTipoChange} className='w-[165px] h-[100] border-2 rounded-md mt-1 mb-2 bg-white p-1'>
+                            <select name="tipo" id="tipo" onChange={handleTipoChange} className='w-[235px] h-[100] border-2 rounded-md mt-1 mb-2 bg-white p-1'>
                                 <option value="" disabled selected style={{ display: "none" }}>
                                     <span style={{ opacity: 0.5 }}>Escolha o tipo</span>
                                 </option>
@@ -167,8 +166,9 @@ return (
                 </button>
             </div>
             </div>
-        </div>
-        </div>
+            {/* </div> */}
+        {/* </div> */}
+        // </div>
     )}
     </div>
 );

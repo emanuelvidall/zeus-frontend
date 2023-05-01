@@ -6,6 +6,7 @@ import ImageComponent from './avatar'
 import ModalAdd from './modaladd'
 import Distribuicao from './distribuicao'
 import Barras from './chart'
+import CurrentDate from './currentdate'
 
 export const myIp = '192.168.0.16';
 
@@ -31,6 +32,7 @@ export default function Home() {
         </div>
         <div className='middleSection bg-white h-[90%] w-1/2 rounded-l-xl flex justify-center items-center p-10'>
           <div className='w-[95%] h-[100%]'>
+          <CurrentDate/>
             <div className='topContainer flex flex-row'>
               <h1 className='text-3xl'>Despesas</h1>
               <div className='totalMes flex-end ml-auto'>
