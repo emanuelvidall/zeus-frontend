@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { myIp } from '.';
-import CustomDatePicker from './datepicker';
-import { isNumericLiteral } from 'typescript';
 import 'animate.css';
+import { InputAdornment, MenuItem, TextField } from '@mui/material';
+import DatePickerMui from './datepickermui';
 
 const ModalAdd = () => {
     const [showModal, setShowModal] = useState(false);
@@ -49,6 +48,25 @@ const ModalAdd = () => {
     useState(() => {
         handleDataChange(currentDate);
     }, []);
+
+    const tipos = [
+        {
+            value: 'racao',
+            label: 'Racao',
+        },
+        {
+            value: 'banho',
+            label: 'Banho',
+        },
+        {
+            value: 'shop',
+            label: 'Shop',
+        },
+        {
+            value: 'clinica',
+            label: 'Clinica',
+        },
+    ]
 
     const dados = { desc, data, tipo, valor, quantidade }
     const url = '/novocusto';
@@ -97,44 +115,45 @@ const ModalAdd = () => {
                         <div className='justify-center flex flex-col items-center'>
                             <div>
                                 <form>
-                                    <h3 className='text-sm font-semibold opacity-80'>Descricao</h3>
-                                    <input id='desc' onChange={handleDescChange} className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2' placeholder='sobre a despesa'></input>
+                                    {/* <h3 className='text-sm font-semibold opacity-80'></h3> */}
+                                    <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc" onChange={handleDescChange} className='' placeholder='sobre a despesa' label="Descricao" variant="outlined" />
                                 </form>
                             </div>
                             <div>
                                 <form>
-                                    <h3 className='text-sm font-semibold opacity-80'>Data (DD-MM-AA)</h3>
+                                    {/* <h3 className='text-sm font-semibold opacity-80'>Data (DD-MM-AA)</h3>
                                     <div className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2'>
                                         <CustomDatePicker onChange={handleDataChange} />
-                                    </div>
+                                    </div> */}
+                                    <DatePickerMui onChange={handleDataChange} />
+                                </form>
+                            </div>
+                            <div>
+                                <TextField
+                                    size='small'
+                                    id="outlined-select-currency"
+                                    select
+                                    label="Tipo"
+                                    defaultValue="EUR"
+                                    // helperText="Please select your currency"
+                                    onChange={handleTipoChange}
+                                    sx={{ m: 1, width: '25ch' }}
+                                >
+                                    {tipos.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </div>
+                            <div>
+                                <form>
+                                    <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-number desc" type="number" onChange={handleQuantidadeChange} className='w-[100] h-[50] border-2 rounded-md mt-1 mb-2' placeholder='sobre a despesa' label="Quantidade" variant="outlined" />
                                 </form>
                             </div>
                             <div>
                                 <form>
-                                    <h3 className='text-sm font-semibold opacity-80'>Tipo</h3>
-                                    <div className='flex flex-col'>
-                                        <select name="tipo" id="tipo" onChange={handleTipoChange} className='w-[235px] h-[100] border-2 rounded-md mt-1 mb-2 bg-white p-1'>
-                                            <option value="" disabled selected style={{ display: "none" }}>
-                                                <span style={{ opacity: 0.5 }}>Escolha o tipo</span>
-                                            </option>
-                                            <option value="racao">Racao</option>
-                                            <option value="banho">Banho</option>
-                                            <option value="shop">Shop</option>
-                                            <option value="clinica">Clinica</option>
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
-                            <div>
-                                <form>
-                                    <h3 className='text-sm font-semibold opacity-80'>Quantidade</h3>
-                                    <input className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2' onChange={handleQuantidadeChange} placeholder='quantidade'></input>
-                                </form>
-                            </div>
-                            <div>
-                                <form>
-                                    <h3 className='text-sm font-semibold opacity-80'>Valor (R$)</h3>
-                                    <input className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2' onChange={handleValorChange} placeholder='valor da despesa'></input>
+                                    <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc" onChange={handleValorChange} className='w-[100] h-[50] border-2 rounded-md mt-1 mb-2' InputProps={{ startAdornment: <InputAdornment position="start">R$</InputAdornment>, }} variant="outlined" label='Valor' />
                                 </form>
                             </div>
                             <div>
