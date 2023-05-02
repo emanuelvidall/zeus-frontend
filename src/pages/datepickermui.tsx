@@ -4,7 +4,7 @@ import CustomParseFormat from 'dayjs/plugin/customParseFormat';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 dayjs.extend(CustomParseFormat);
 
@@ -18,6 +18,12 @@ const DatePickerMui = ({ onChange }) => {
       onChange(formattedDate);
     }
   };
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(startDate);
+    }
+  }, []);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

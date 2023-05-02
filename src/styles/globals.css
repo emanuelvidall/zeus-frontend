@@ -40,3 +40,7 @@ html {
 .racao, .banho, .shop, .clinica {
   margin-bottom: 20px;
 }
+
+.swal-modal .swal-text {
+  text-align: center;
+}

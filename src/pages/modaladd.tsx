@@ -6,6 +6,7 @@ import { myIp } from '.';
 import 'animate.css';
 import { InputAdornment, MenuItem, TextField } from '@mui/material';
 import DatePickerMui from './datepickermui';
+import swal from 'sweetalert';
 
 const ModalAdd = () => {
     const [showModal, setShowModal] = useState(false);
@@ -76,7 +77,8 @@ const ModalAdd = () => {
     function postData(url, dados) {
 
         if (!dados.desc || !dados.data || !dados.tipo || !dados.valor || !dados.quantidade) {
-            alert('Preencha todo o formulário para adicionar a despesa');
+            // alert('Preencha todo o formulário para adicionar a despesa');
+            swal("Oops!", "Preencha todos os campos para adicionar sua despesa", "error");
             return;
         }
         return fetch(`http://${myIp}:3001${url}`, {
@@ -89,7 +91,8 @@ const ModalAdd = () => {
             .then(response => {
                 response.json()
                 console.log('Success:', response);
-                alert('Your message was sent successfully!');
+                // alert('Your message was sent successfully!');
+                swal("Adicionada!", "Sua despesa foi adicionada com sucesso", "success");
                 setDesc('');
                 setData('')
                 setTipo('')
