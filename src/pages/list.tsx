@@ -62,7 +62,7 @@ const CostList = () => {
 
 
     return (
-    <div className='listRender absolute h-[44%] w-[40%] pl-7 overflow-y-scroll pt-10'>
+    <div className='listRender absolute h-[48%] w-[40%] pl-7 overflow-y-scroll pt-10'>
         {lastTenItems.map((item, index) => {
     return (
         <div key={item._id}  onMouseEnter={() => setHoverIndex(index)} onClick={() => handleModal(item)}

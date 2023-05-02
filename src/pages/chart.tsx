@@ -52,7 +52,7 @@ const Barras = () => {
   return (
     <>
       {data.length > 0 && (
-        <div className='h-full w-full relative'>
+        <div className='h-1/2 w-full relative'>
           <VictoryChart padding={{ top: 10, bottom: 50, left: 5, right: 5 }} width={1500} height={300}
           >
             <VictoryAxis
@@ -61,8 +61,8 @@ const Barras = () => {
                         domain={[0, 13]}
                         tickLabelComponent={<VictoryLabel style={{ fontSize: 30, fontFamily: 'sans-serif', }} />}
           />
-              <VictoryBar barRatio={1} alignment="middle" labelComponent={<VictoryTooltip flyoutPadding={33}/>}
-              labels={({ datum }) => `R$${datum.valor}`} style={
+              <VictoryBar barRatio={1} alignment="middle" labelComponent={<VictoryTooltip flyoutPadding={10}/>}
+              labels={({ datum }) => `R$${datum.valor}`} y='value' style={
                 {data: {
                   fill: ({ datum }) => (datum.month === currentMonthIndex ? '#65A30D' : '#1e2229'),
                 }, labels: {
@@ -124,7 +124,9 @@ const Barras = () => {
                 x="month"
                 // data accessor for y values
                 y="valor"
+              
               />
+              
           </VictoryChart>
           </div>
         )}

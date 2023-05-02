@@ -40,7 +40,7 @@ export default function Home() {
                 <h1 className='text-sm text-left'>Total</h1>
               </div>
           </div>
-          <div className='chartContainer w-full h-[200px] mb-2'>
+          <div className='chartContainer w-full mb-2'>
             <Barras/>
           </div>
           <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>

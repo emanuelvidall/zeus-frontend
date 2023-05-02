@@ -120,9 +120,9 @@ const Distribuicao = () => {
             <div className='h-[60%]'>
                 <div className='dicasSave w-[75%] h-[35%] rounded-xl self-center ml-auto mr-auto'>
                     <h1 className='text-sm opacity-50'>Veja as melhores dicas de como cuidar de seu pet no blog</h1>
-                    <Image src='/images/dicas.png' alt='dicas' width={400} height={400}/>
+                    <Image id="dicasimg" src='/images/dicas.png' alt='dicas' width={400} height={400}/>
                     <div className='justify-center items-center pl-2'>
-                        <button className='ml-auto mr-auto self-center text-center w-[95%] rounded-md p-2 pt-3 bg-slate-600 text-base font-medium text-white hover:bg-primary-700 hover:scale-110 transition-all duration-300 ease-in-out'>Aumigo Dicas 🐶</button>
+                        <button id="aumigobotao" className='ml-auto mr-auto self-center text-center w-[95%] rounded-md p-2 pt-3 bg-slate-600 text-base font-medium text-white hover:bg-primary-700 hover:scale-110 transition-all duration-300 ease-in-out'>Aumigo Dicas 🐶</button>
                     </div>    
                 </div>
             </div>

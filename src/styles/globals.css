@@ -44,3 +44,18 @@ html {
 .swal-modal .swal-text {
   text-align: center;
 }
+
+@media only screen and (max-height: 800px) {
+  .listRender {
+    height: 220px !important;
+  }
+  #dicasimg {
+    height: 85px;
+    width: 85px;
+  }
+  #aumigobotao {
+    width: 150px;
+    height: 40px;
+    padding: 0px;
+  }
+}
