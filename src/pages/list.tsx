@@ -9,7 +9,18 @@ import ModalEdit from './modaledit';
 const CostList = () => {
     const [data, setData] = useState([]);
     const [hoverIndex, setHoverIndex] = useState(null);
-    const [selectedId, setSelectedId] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [showEditModal, setShowEditModal] = useState(false);
+
+    const handleModal = (item) => {
+        setShowEditModal(!showEditModal);
+        setSelectedItem(item);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedItem(null);
+        setShowEditModal(!showEditModal);
+    };
 
     console.log('carregando......')
 
@@ -69,8 +80,8 @@ const CostList = () => {
                 console.error(error);
             });
         }
-        return (
-        <div key={item._id}  onMouseEnter={() => setHoverIndex(index)}
+    return (
+        <div key={item._id}  onMouseEnter={() => setHoverIndex(index)} onClick={() => handleModal(item)}
           onMouseLeave={() => setHoverIndex(null)} className='w-[90%] cursor-pointer mt-1 flex flex-row mb-6 hover:shadow-lg hover:scale-105 transition-all hover:bg-slate-100 duration-300 rounded-xl p-4'>
             <div className='leftPart flex flex-row'>
                 <div>
@@ -102,8 +113,7 @@ const CostList = () => {
             </div>
             {hoverIndex === index && (
             <div className='absolute top-0 left-100 right-0 bottom-20 flex items-center justify-center self-center transition-all duration-1000 ease-in-out'>
-                <div className='rounded-md text-white mr-1 bg-orange-500 w-[28px] h-[28px] items-center flex justify-center align-middle'>
-                    <FontAwesomeIcon className='text-base'icon={faPenToSquare} />
+                <div>
                 </div>
                 <div className='rounded-md bg-red-500 text-white w-[28px] h-[28px] items-center flex justify-center align-middle' onClick={handleDelete}>
                     <FontAwesomeIcon className='text-base'icon={faTrashCan} />
@@ -113,6 +123,19 @@ const CostList = () => {
         </div>
         );
     })}
+    {
+    selectedItem && (
+        <ModalEdit
+            onRequestClose={handleCloseModal}
+            valor={selectedItem.valor}
+            data={selectedItem.data}
+            tipo={selectedItem.tipo}
+            desc={selectedItem.desc}
+            _id={selectedItem._id}
+            quantidade={selectedItem.quantidade}
+        />
+    )
+}
     </div>
     );
     };

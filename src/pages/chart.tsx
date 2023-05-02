@@ -48,12 +48,12 @@ const Barras = () => {
   const currentMonthIndex = currentDate.getMonth()+1
   const monthNames = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
   const currentMonth = monthNames[currentMonthIndex];
-
+  
   return (
     <>
       {data.length > 0 && (
         <div className='h-full w-full relative'>
-          <VictoryChart padding={{ top: 10, bottom: 50, left: 5, right: 5 }} width={1500} height={500}
+          <VictoryChart padding={{ top: 10, bottom: 50, left: 5, right: 5 }} width={1500} height={300}
           >
             <VictoryAxis
                         style={{axis:{stroke:'none'}}}
@@ -73,7 +73,52 @@ const Barras = () => {
                 
               }
             }cornerRadius={6} barWidth={50}
-            
+            events={[
+              {
+                target: 'data',
+                eventHandlers: {
+                  onMouseOver: () => {
+                    return [
+                      {
+                        target: 'data',
+                        mutation: (props) => {
+                          return {
+                            style: {
+                              ...props.style,
+                              cursor: 'pointer',
+                              fill: '#475569',
+                              scale: 1.1,
+                            },
+                          };
+                        },
+                      },
+                    ];
+                  },
+                  onMouseOut: () => {
+                    return [
+                      {
+                        target: 'data',
+                        mutation: (props) => {
+                          const originalColor =
+  props.datum.month === currentMonthIndex
+    ? "#65A30D"
+    : "#1e2229";
+                          return {
+                            style: {
+                              ...props.style,
+                              cursor: 'default',
+                              fill: originalColor,
+                              scale: 1,
+                            },
+                            _originalColor: originalColor,
+                          };
+                        },
+                      },
+                    ];
+                  },
+                },
+              },
+            ]}
             data={data}
                 // data accessor for x values
                 x="month"
