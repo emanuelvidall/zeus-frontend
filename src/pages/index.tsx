@@ -8,7 +8,7 @@ import Distribuicao from './distribuicao'
 import Barras from './chart'
 import CurrentDate from './currentdate'
 
-export const myIp = '192.168.0.16';
+export const myIp = '10.50.188.123';
 
 const inter = Inter({ subsets: ['latin'] })
 

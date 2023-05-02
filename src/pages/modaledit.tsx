@@ -17,7 +17,7 @@ interface ModalEditProps {
     quantidade: number;
 }
 
-const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, valor, data, tipo, desc, _id, quantidade }) => {
+const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, onRequestExclude, valor, data, tipo, desc, _id, quantidade }) => {
     const [newDesc, setNewDesc] = useState<string>('');
     const [showModal, setShowModal] = useState(false);
     const [newValor, setNewValor] = useState<number>(0);
@@ -116,6 +116,24 @@ const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, valor, data, tipo
             });
     }
 
+
+    const handleDelete = () => {
+            fetch(`http://${myIp}:3001/costs/${_id}`, {
+            method: "DELETE",
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                // handle success
+                console.log(data);
+                swal("Deletado!", "A despesa foi deletada com sucesso!", "warning");
+                onRequestClose()
+            })
+            .catch((error) => {
+                // handle error
+                console.error(error);
+            });
+        }
+
     return (
         <div className="w-full rounded-xl z-10 h-full fixed fixed bg-slate-600/50 top-0 left-0 align-center flex items-center justify-center">
             <div className="animate__animated animate__bounceInUp bg-white h-fit pb-10 w-1/3 rounded-xl pt-5">
@@ -172,6 +190,13 @@ const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, valor, data, tipo
                         >
                             Editar
                         </button>
+                        <button
+                            type="button"
+                            className="mt-5 mb-5 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm hover:scale-110 transition-all duration-300 ease-in-out mb-2"
+                            onClick={() => handleDelete()}
+                        >
+                            Deletar
+                        </button>
                     </div>
                     <div className="bg-gray-200 w-full bottom-0 fixed rounded-b-xl flex flex-row-reverse pr-4">
                         <button
@@ -181,6 +206,7 @@ const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, valor, data, tipo
                         >
                             Fechar
                         </button>
+                        
                     </div>
                 </div>
                 <div className="mt-4 space-y-4 flex flex-row">

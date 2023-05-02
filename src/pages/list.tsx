@@ -61,25 +61,9 @@ const CostList = () => {
     console.log('dados carregados:...', lastTenItems)
 
 
-
     return (
     <div className='listRender absolute h-[44%] w-[40%] pl-7 overflow-y-scroll pt-10'>
         {lastTenItems.map((item, index) => {
-
-        const handleDelete = () => {
-            fetch(`http://${myIp}:3001/costs/${item._id}`, {
-            method: "DELETE",
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                // handle success
-                console.log(data);
-            })
-            .catch((error) => {
-                // handle error
-                console.error(error);
-            });
-        }
     return (
         <div key={item._id}  onMouseEnter={() => setHoverIndex(index)} onClick={() => handleModal(item)}
           onMouseLeave={() => setHoverIndex(null)} className='w-[90%] cursor-pointer mt-1 flex flex-row mb-6 hover:shadow-lg hover:scale-105 transition-all hover:bg-slate-100 duration-300 rounded-xl p-4'>
@@ -115,9 +99,9 @@ const CostList = () => {
             <div className='absolute top-0 left-100 right-0 bottom-20 flex items-center justify-center self-center transition-all duration-1000 ease-in-out'>
                 <div>
                 </div>
-                <div className='rounded-md bg-red-500 text-white w-[28px] h-[28px] items-center flex justify-center align-middle' onClick={handleDelete}>
+                {/* <div className='rounded-md bg-red-500 text-white w-[28px] h-[28px] items-center flex z-10 justify-center align-middle' onClick={handleDelete}>
                     <FontAwesomeIcon className='text-base'icon={faTrashCan} />
-                </div>
+                </div> */}
             </div>
             )}
         </div>
