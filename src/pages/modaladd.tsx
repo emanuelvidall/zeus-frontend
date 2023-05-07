@@ -98,6 +98,7 @@ const ModalAdd = () => {
                 setTipo('')
                 setQuantidade(0)
                 setValor(0)
+                setShowModal(false)
             })
             .catch(error => {
                 console.error(error);
@@ -159,10 +160,10 @@ const ModalAdd = () => {
                                     <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc" onChange={handleValorChange} className='w-[100] h-[50] border-2 rounded-md mt-1 mb-2' InputProps={{ startAdornment: <InputAdornment position="start">R$</InputAdornment>, }} variant="outlined" label='Valor' />
                                 </form>
                             </div>
-                            <div>
+                            <div className='mb-5'>
                                 <button
                                     type="button"
-                                    className="mt-5 mb-5 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm hover:scale-110 transition-all duration-300 ease-in-out mb-2"
+                                    className="mt-5 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm hover:scale-110 transition-all duration-300 ease-in-out mb-2"
                                     onClick={() => postData(url, dados)}
                                 >
                                     Adicionar

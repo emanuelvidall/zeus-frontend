@@ -8,7 +8,7 @@ import Distribuicao from './distribuicao'
 import Barras from './chart'
 import CurrentDate from './currentdate'
 
-export const myIp = '10.50.188.123';
+export const myIp = '10.50.188.151';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -49,7 +49,7 @@ export default function Home() {
               <ModalAdd />
             </div>
             <div>
-              <h3 className='text-sm'>Últimas 10 despesas</h3>
+              {/* <h3 className='text-sm'>Últimas 10 despesas</h3> */}
             </div>
             <div className='listSeparator w-[100%] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto'>
             </div>
