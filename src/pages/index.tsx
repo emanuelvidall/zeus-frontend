@@ -11,7 +11,7 @@ import { faAnglesDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PorTipo from './portipo'
 
-export const myIp = '10.50.188.169';
+export const myIp = '172.18.9.236';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,9 +27,6 @@ export default function Home() {
             <h3 className='text-neutral-500 text-base'>18kg</h3>
             <h3 className='text-neutral-500 text-base'>2 anos</h3>
             <div className='listSection mt-20 text-neutral-500 text-2xl space-y-10 flex flex-col'>
-              {/* <a className='hover:text-white cursor-pointer'>Home</a>
-              <a className='hover:text-white cursor-pointer'>Despesas</a>
-              <a className='hover:text-white cursor-pointer'>Resumo</a> */}
             </div>
           </div>
         </div>
@@ -55,7 +52,7 @@ export default function Home() {
               </div>
               <div className='listSeparator w-[100%] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto mb-2'>
               </div>
-              <div className='left-[45%] absolute z-[10]'>
+              <div className='w-full absolute z-[10]'>
                 <ModalAdd />
               </div>
               <div className=''>

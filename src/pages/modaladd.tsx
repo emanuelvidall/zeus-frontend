@@ -104,11 +104,11 @@ const ModalAdd = () => {
     }
 
     return (
-        <div className='ml-auto'>
+        <div className='w-[668px] items-center justify-center content-center flex flex-row'>
             <button
                 type="button"
-                className="w-[fit] px-2 py-2 h-[30px] bg-green-600 rounded-full text-white transition-all duration-500 pt-1 ease-in-out hover:scale-110 hover:shadow-lg"
-                onClick={() => setShowModal(true)}>Nova Despesa</button>
+                className="w-[fit] font-bold px-2 py-2 h-[30px] bg-[#22c55e] rounded-full text-white transition-all duration-500 pt-1 ease-in-out hover:scale-110 hover:shadow-lg"
+                onClick={() => setShowModal(true)}>+ Nova Despesa</button>
 
             {showModal && (
                 <div className="w-[100%] z-10 h-[100%] fixed bg-slate-600/50 top-0 left-0 align-center flex items-center justify-center">

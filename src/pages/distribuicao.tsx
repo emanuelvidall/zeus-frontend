@@ -96,25 +96,25 @@ const Distribuicao = () => {
         <div className='racao container'>
             <h1 className='text-sm font-bold'>Ração</h1>
             <div className='w-[90%] h-2 rounded-xl bg-slate-200'>
-                <div className='h-2 rounded-xl bg-green-500 cursor-pointer' style={{ width: `${barLenghtRacao}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLenghtRacao+'%'+' - R$'+racaoTotal.toFixed(2)}><Tooltip id="my-tooltip" /></div>
+                <div className='h-2 rounded-xl bg-[#DC3434] cursor-pointer' style={{ width: `${barLenghtRacao}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLenghtRacao+'%'+' - R$'+racaoTotal.toFixed(2)}><Tooltip id="my-tooltip" /></div>
             </div>
             </div>
             <div className='banho container'>
             <h1 className='text-sm font-bold'>Banho</h1>
             <div className='w-[90%] h-2 rounded-xl bg-slate-200'>
-                <div className='w-[20%] h-2 rounded-xl bg-green-500 cursor-pointer' style={{ width: `${barLengthBanho}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLengthBanho+'%'+' - R$'+banhoTotal.toFixed(2)}><Tooltip id="my-tooltip" /></div>
+                <div className='w-[20%] h-2 rounded-xl bg-[#32A7E2] cursor-pointer' style={{ width: `${barLengthBanho}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLengthBanho+'%'+' - R$'+banhoTotal.toFixed(2)}><Tooltip id="my-tooltip" /></div>
             </div>
             </div>
             <div className='shop container'>
             <h1 className='text-sm font-bold'>Shop</h1>
             <div className='w-[90%] h-2 rounded-xl bg-slate-200'>
-                <div className='w-[50%] h-2 rounded-xl bg-green-500 cursor-pointer' style={{ width: `${barLengthShop}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLengthShop+'%'+' - R$'+shopTotal.toFixed(2)}><Tooltip id="my-tooltip" /></div>
+                <div className='w-[50%] h-2 rounded-xl bg-[#4BA83D] cursor-pointer' style={{ width: `${barLengthShop}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLengthShop+'%'+' - R$'+shopTotal.toFixed(2)}><Tooltip id="my-tooltip" /></div>
             </div>
             </div>
             <div className='clinica container'>
             <h1 className='text-sm font-bold'>Clínica</h1>
             <div className='w-[90%] h-2 rounded-xl bg-slate-200'>
-                <div className='w-[8%] h-2 rounded-xl bg-green-500 cursor-pointer' style={{ width: `${barLengthClinica}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLengthClinica+'%'+' - R$'+clinicaTotal.toFixed(2)}><Tooltip id="my-tooltip" /></div>
+                <div className='w-[8%] h-2 rounded-xl bg-[#B548C6] cursor-pointer' style={{ width: `${barLengthClinica}%` }} data-tooltip-id="my-tooltip" data-tooltip-content={barLengthClinica+'%'+' - R$'+clinicaTotal.toFixed(2)}><Tooltip id="my-tooltip" /></div>
             </div>
             </div>
             <div className='h-[60%]'>
