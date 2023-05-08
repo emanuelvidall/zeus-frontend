@@ -7,8 +7,11 @@ import ModalAdd from './modaladd'
 import Distribuicao from './distribuicao'
 import Barras from './chart'
 import CurrentDate from './currentdate'
+import { faAnglesDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import PorTipo from './portipo'
 
-export const myIp = '10.50.188.151';
+export const myIp = '10.50.188.169';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,36 +30,41 @@ export default function Home() {
               {/* <a className='hover:text-white cursor-pointer'>Home</a>
               <a className='hover:text-white cursor-pointer'>Despesas</a>
               <a className='hover:text-white cursor-pointer'>Resumo</a> */}
-          </div>
+            </div>
           </div>
         </div>
         <div className='middleSection bg-white h-[90%] w-1/2 rounded-l-xl flex justify-center items-center p-10'>
           <div className='w-[95%] h-[100%]'>
-          <CurrentDate/>
+            <CurrentDate />
             <div className='topContainer flex flex-row'>
               <h1 className='text-3xl'>Despesas</h1>
               <div className='totalMes flex-end ml-auto'>
                 <TotalCosts />
                 <h1 className='text-sm text-left'>Total</h1>
               </div>
-          </div>
-          <div className='chartContainer w-full mb-2'>
-            <Barras/>
-          </div>
-          <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>
-            <div className='listContainerHead w-full h-5 mb-2 flex flex-row'>
-              <h3 className='font-semibold'>Histórico</h3>
-              <ModalAdd />
             </div>
-            <div>
-              {/* <h3 className='text-sm'>Últimas 10 despesas</h3> */}
+            <div className='chartContainer w-full mb-2'>
+              <Barras />
             </div>
-            <div className='listSeparator w-[100%] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto'>
-            </div>
+            <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>
+              <div className='listContainerHead w-full h-5 mb-2 flex flex-row'>
+                <h3 className='font-semibold'>Últimas Despesas</h3>
+                
+              </div>
+              <div>
+              </div>
+              <div className='listSeparator w-[100%] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto mb-2'>
+              </div>
+              <div className='left-[45%] absolute z-[10]'>
+                <ModalAdd />
+              </div>
               <div className=''>
                 <List />
               </div>
-          </div> 
+            </div>
+            <div className='left-[50%] absolute'>
+              <FontAwesomeIcon icon={faAnglesDown} className='text-2xl' color='#1e2229'/>
+            </div>
           </div>
         </div>
         <div className='rightSection bg-slate-50 h-[90%] w-1/4 rounded-r-xl p-10'>
@@ -64,13 +72,14 @@ export default function Home() {
             <h1 className='text-xl font-semibold mt-3 opacity-90'>Distribuição das Despesas</h1>
             <h2 className='text-sm text-left'>Total</h2>
           </div>
-            <div className='w-[100%] h-[90%] pt-5'>
-              <Distribuicao/>
-            </div>
+          <div className='w-[100%] h-[90%] pt-5'>
+            <Distribuicao />
+          </div>
         </div>
       </div>
       <footer className='absolute bottom-0'>
         <h2>Desenvolvido por Emanuel Vidal em Vortex @ UNIFOR 2023</h2>
+        <PorTipo/>
       </footer>
     </main>
   )

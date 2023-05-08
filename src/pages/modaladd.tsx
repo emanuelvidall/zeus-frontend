@@ -77,7 +77,6 @@ const ModalAdd = () => {
     function postData(url, dados) {
 
         if (!dados.desc || !dados.data || !dados.tipo || !dados.valor || !dados.quantidade) {
-            // alert('Preencha todo o formulário para adicionar a despesa');
             swal("Oops!", "Preencha todos os campos para adicionar sua despesa", "error");
             return;
         }
@@ -91,7 +90,6 @@ const ModalAdd = () => {
             .then(response => {
                 response.json()
                 console.log('Success:', response);
-                // alert('Your message was sent successfully!');
                 swal("Adicionada!", "Sua despesa foi adicionada com sucesso", "success");
                 setDesc('');
                 setData('')
@@ -109,8 +107,8 @@ const ModalAdd = () => {
         <div className='ml-auto'>
             <button
                 type="button"
-                className="w-[30px] h-[30px] bg-green-600 rounded-full text-white transition-all duration-500 pt-1 ease-in-out hover:scale-110"
-                onClick={() => setShowModal(true)}><FontAwesomeIcon icon={faPlus} /></button>
+                className="w-[fit] px-2 py-2 h-[30px] bg-green-600 rounded-full text-white transition-all duration-500 pt-1 ease-in-out hover:scale-110 hover:shadow-lg"
+                onClick={() => setShowModal(true)}>Nova Despesa</button>
 
             {showModal && (
                 <div className="w-[100%] z-10 h-[100%] fixed bg-slate-600/50 top-0 left-0 align-center flex items-center justify-center">
@@ -119,16 +117,11 @@ const ModalAdd = () => {
                         <div className='justify-center flex flex-col items-center'>
                             <div>
                                 <form>
-                                    {/* <h3 className='text-sm font-semibold opacity-80'></h3> */}
                                     <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc" onChange={handleDescChange} className='' placeholder='sobre a despesa' label="Descricao" variant="outlined" />
                                 </form>
                             </div>
                             <div>
                                 <form>
-                                    {/* <h3 className='text-sm font-semibold opacity-80'>Data (DD-MM-AA)</h3>
-                                    <div className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2'>
-                                        <CustomDatePicker onChange={handleDataChange} />
-                                    </div> */}
                                     <DatePickerMui onChange={handleDataChange} />
                                 </form>
                             </div>
@@ -139,7 +132,6 @@ const ModalAdd = () => {
                                     select
                                     label="Tipo"
                                     defaultValue="EUR"
-                                    // helperText="Please select your currency"
                                     onChange={handleTipoChange}
                                     sx={{ m: 1, width: '25ch' }}
                                 >

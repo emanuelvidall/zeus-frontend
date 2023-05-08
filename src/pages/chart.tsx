@@ -45,10 +45,10 @@ const Barras = () => {
   }, []);
 
   const currentDate = new Date();
-  const currentMonthIndex = currentDate.getMonth()+1
+  const currentMonthIndex = currentDate.getMonth() + 1
   const monthNames = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
   const currentMonth = monthNames[currentMonthIndex];
-  
+
   return (
     <>
       {data.length > 0 && (
@@ -56,80 +56,81 @@ const Barras = () => {
           <VictoryChart padding={{ top: 10, bottom: 50, left: 5, right: 5 }} width={1500} height={300}
           >
             <VictoryAxis
-                        style={{axis:{stroke:'none'}}}
-                        tickValues={['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']}
-                        domain={[0, 13]}
-                        tickLabelComponent={<VictoryLabel style={{ fontSize: 30, fontFamily: 'sans-serif', }} />}
-          />
-              <VictoryBar barRatio={1} alignment="middle" labelComponent={<VictoryTooltip flyoutPadding={10}/>}
+              style={{ axis: { stroke: 'none' } }}
+              tickValues={['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']}
+              domain={[0, 13]}
+              tickLabelComponent={<VictoryLabel style={{ fontSize: 30, fontFamily: 'sans-serif', }} />}
+            />
+            <VictoryBar barRatio={1} alignment="middle" labelComponent={<VictoryTooltip flyoutPadding={10} />}
               labels={({ datum }) => `R$${datum.valor}`} y='value' style={
-                {data: {
-                  fill: ({ datum }) => (datum.month === currentMonthIndex ? '#65A30D' : '#1e2229'),
-                }, labels: {
-                  fontFamily: 'sans-serif',
-                  fontSize: 30,
-                  fontWeight: 'bold',
-                } 
-                
-              }
-            }cornerRadius={6} barWidth={50}
-            events={[
-              {
-                target: 'data',
-                eventHandlers: {
-                  onMouseOver: () => {
-                    return [
-                      {
-                        target: 'data',
-                        mutation: (props) => {
-                          return {
-                            style: {
-                              ...props.style,
-                              cursor: 'pointer',
-                              fill: '#475569',
-                              scale: 1.1,
-                            },
-                          };
+                {
+                  data: {
+                    fill: ({ datum }) => (datum.month === currentMonthIndex ? '#22c55e' : '#1e2229'),
+                  }, labels: {
+                    fontFamily: 'sans-serif',
+                    fontSize: 30,
+                    fontWeight: 'bold',
+                  }
+
+                }
+              } cornerRadius={6} barWidth={50}
+              events={[
+                {
+                  target: 'data',
+                  eventHandlers: {
+                    onMouseOver: () => {
+                      return [
+                        {
+                          target: 'data',
+                          mutation: (props) => {
+                            return {
+                              style: {
+                                ...props.style,
+                                cursor: 'pointer',
+                                fill: '#475569',
+                                scale: 1.1,
+                              },
+                            };
+                          },
                         },
-                      },
-                    ];
-                  },
-                  onMouseOut: () => {
-                    return [
-                      {
-                        target: 'data',
-                        mutation: (props) => {
-                          const originalColor =
-  props.datum.month === currentMonthIndex
-    ? "#65A30D"
-    : "#1e2229";
-                          return {
-                            style: {
-                              ...props.style,
-                              cursor: 'default',
-                              fill: originalColor,
-                              scale: 1,
-                            },
-                            _originalColor: originalColor,
-                          };
+                      ];
+                    },
+                    onMouseOut: () => {
+                      return [
+                        {
+                          target: 'data',
+                          mutation: (props) => {
+                            const originalColor =
+                              props.datum.month === currentMonthIndex
+                                ? "#22c55e"
+                                : "#1e2229";
+                            return {
+                              style: {
+                                ...props.style,
+                                cursor: 'default',
+                                fill: originalColor,
+                                scale: 1,
+                              },
+                              _originalColor: originalColor,
+                            };
+                          },
                         },
-                      },
-                    ];
+                      ];
+                    },
                   },
                 },
-              },
-            ]}
-            data={data}
-                // data accessor for x values
-                x="month"
-                // data accessor for y values
-                y="valor"
-              
-              />
-              
+              ]}
+              data={data}
+              // data accessor for x values
+              x="month"
+              // data accessor for y values
+              y="valor"
+
+            />
+
           </VictoryChart>
-          </div>
-        )}
+        </div>
+      )}
     </>
   );
 };

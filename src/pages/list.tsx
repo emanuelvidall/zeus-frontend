@@ -13,7 +13,7 @@ const CostList = () => {
     const [showEditModal, setShowEditModal] = useState(false);
 
     const handleModal = (item) => {
-        setShowEditModal(!showEditModal);
+        setShowEditModal(!showEditModal);fetch
         setSelectedItem(item);
     };
 
@@ -45,24 +45,21 @@ const CostList = () => {
     // Fetch data on mount
     fetchData();
 
-    //if lista has empty format try to get a formal decision for the encrypt of every time the transactions has to be done on the way it gets done. If not, try IHC later o lets move forward,  using tailwind css for the trying to not get enought data for the awesome idea so it has more.
-
-    // Refresh data every 2 seconds
     const intervalId = setInterval(() => {
         fetchData();
     }, 2000);
 
-    // Clean up the interval when the component unmounts
+    
     return () => clearInterval(intervalId);
     }, []);
 
-    const lastTenItems = data.slice(-10).reverse()
+    const lastTenItems = data.slice(-2).reverse()
 
     console.log('dados carregados:...', lastTenItems)
 
 
     return (
-    <div className='listRender absolute h-[48%] w-[40%] pl-7 overflow-y-scroll pt-10'>
+    <div className='listRender absolute h-[50%] w-[40%] pl-7 overflow-y-scroll pt-10'>
         {lastTenItems.map((item, index) => {
     return (
         <div key={item._id}  onMouseEnter={() => setHoverIndex(index)} onClick={() => handleModal(item)}
