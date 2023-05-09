@@ -40,12 +40,13 @@ export default function Home() {
                 <h1 className='text-sm text-left'>Total</h1>
               </div>
             </div>
-            <div className='chartContainer w-full mb-2'>
-              <Barras />
+            <div className='chartContainer h-[150px] w-full mb-2 flex relative items-center justify-center align-center'>
+              {/* <Barras /> */}
+              <PorTipo/>
             </div>
             <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>
               <div className='listContainerHead w-full h-5 mb-2 flex flex-row'>
-                <h3 className='font-semibold'>Últimas Despesas</h3>
+                <h3 className='font-semibold'>Últimas 10 Despesas</h3>
                 
               </div>
               <div>
@@ -59,9 +60,9 @@ export default function Home() {
                 <List />
               </div>
             </div>
-            <div className='left-[50%] absolute'>
+            {/* <div className='left-[50%] absolute'>
               <FontAwesomeIcon icon={faAnglesDown} className='text-2xl' color='#1e2229'/>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className='rightSection bg-slate-50 h-[90%] w-1/4 rounded-r-xl p-10'>
@@ -76,7 +77,6 @@ export default function Home() {
       </div>
       <footer className='absolute bottom-0'>
         <h2>Desenvolvido por Emanuel Vidal em Vortex @ UNIFOR 2023</h2>
-        <PorTipo/>
       </footer>
     </main>
   )

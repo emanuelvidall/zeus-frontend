@@ -104,7 +104,7 @@ const ModalAdd = () => {
     }
 
     return (
-        <div className='w-[668px] items-center justify-center content-center flex flex-row'>
+        <div className='w-[40%] items-center justify-center content-center flex flex-row'>
             <button
                 type="button"
                 className="w-[fit] font-bold px-2 py-2 h-[30px] bg-[#22c55e] rounded-full text-white transition-all duration-500 pt-1 ease-in-out hover:scale-110 hover:shadow-lg"

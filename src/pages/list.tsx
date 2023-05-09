@@ -53,7 +53,7 @@ const CostList = () => {
     return () => clearInterval(intervalId);
     }, []);
 
-    const lastTenItems = data.slice(-2).reverse()
+    const lastTenItems = data.slice(-10).reverse()
 
     console.log('dados carregados:...', lastTenItems)
 
@@ -63,7 +63,7 @@ const CostList = () => {
         {lastTenItems.map((item, index) => {
     return (
         <div key={item._id}  onMouseEnter={() => setHoverIndex(index)} onClick={() => handleModal(item)}
-          onMouseLeave={() => setHoverIndex(null)} className='w-[90%] cursor-pointer mt-1 flex flex-row mb-6 hover:shadow-lg hover:scale-105 transition-all hover:bg-slate-100 duration-300 rounded-xl p-4'>
+          onMouseLeave={() => setHoverIndex(null)} className='w-[90%] border-solid border-2 border-slate-200 cursor-pointer mt-1 flex flex-row mb-6 hover:shadow-lg hover:scale-105 transition-all hover:bg-slate-100 duration-300 rounded-xl p-4'>
             <div className='leftPart flex flex-row'>
                 <div>
                     {item.tipo == 'racao' ? (
