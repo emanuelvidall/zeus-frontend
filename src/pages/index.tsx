@@ -1,83 +1,44 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import TotalCosts from './totalcosts'
-import List from './list'
-import ImageComponent from './avatar'
-import ModalAdd from './modaladd'
-import Distribuicao from './distribuicao'
-import Barras from './chart'
-import CurrentDate from './currentdate'
-import { faAnglesDown } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import PorTipo from './portipo'
+import React, { useState } from 'react';
+import 'animate.css';
+import { TextField } from '@mui/material';
+import swal from 'sweetalert';
 
-export const myIp = '172.18.9.236';
+export default function Login() {
 
-const inter = Inter({ subsets: ['latin'] })
+const [email, setEmail] = useState('');
+const [token, setToken] = useState('');
+const [authenticated, isAuthenticated] = useState(false);
 
-export default function Home() {
+
   return (
     <main className='items-center flex justify-center h-screen'>
-      <div className='bg-[#1e2229] drop-shadow-xl rounded-xl items-center flex justify-center pl-10 pr-10 h-[90%] w-[90%]'>
-        <div className='leftSection bg-zing-950s h-5/6 w-1/6 mr-10 rounded-xl'>
-          <div className='avatarSection h-20 w-30'>
-            <ImageComponent />
-            <h1 className='text-zinc-50 text-3xl mt-5 mb-1'>Zeus</h1>
-            <h3 className='text-neutral-500 text-base'>Border Collie</h3>
-            <h3 className='text-neutral-500 text-base'>18kg</h3>
-            <h3 className='text-neutral-500 text-base'>2 anos</h3>
-            <div className='listSection mt-20 text-neutral-500 text-2xl space-y-10 flex flex-col'>
+        <div className='bg-[#1e2229] drop-shadow-xl rounded-xl items-center flex justify-center pl-10 pr-10 h-[90%] w-[90%]'>
+          <div className='bg-white rounded-xl animate__animated animate__bounceInUp w-1/3 h-2/3'>
+            <div className='p-10'>
+                <h1 style={{fontFamily: 'sans-serif'}} className='font-bold color-black text-xl text-center font-readex'>Crie ou Entre com sua conta 🐶</h1>
+                <div className='flex pl-7 justify-center'>
+                  <img src='/images/splashlogo1.png' width={250} height={250} alt='logo' />
+                </div>
+                <div className='mt-5 items-center flex flex-col'>
+                  <h1 className='font-bold self-start ml-20'>Login</h1>
+                  <form>
+                    <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc" onChange={()=>{console.log('oi')}} className='' placeholder='utilize seu email' label="" variant="outlined" />
+                  </form>
+                  <h1 className='font-bold self-start ml-20 mt-5'>Senha</h1>
+                  <form>
+                    <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc" onChange={()=>{console.log('oi')}} className='' placeholder='digite sua senha' label="" variant="outlined" />
+                  </form>
+                  <h1 className='text-blue-500 text-xs underline hover:cursor-pointer mt-5'>Esqueci minha senha</h1>
+                  <div className='flex flex-row mt-10'>
+                    <button className='rounded bg-green-500 hover:scale-110 transition-all duration-300 ease-in-out w-[120px] p-2 mr-5 font-bold text-white'>Login</button>
+                    <button className='rounded bg-blue-500 hover:scale-110 transition-all duration-300 ease-in-out w-[120px] p-2 ml-5 font-bold text-white'>Registrar</button>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
-        <div className='middleSection bg-white h-[90%] w-1/2 rounded-l-xl flex justify-center items-center p-10'>
-          <div className='w-[95%] h-[100%]'>
-            <CurrentDate />
-            <div className='topContainer flex flex-row'>
-              <h1 className='text-3xl'>Despesas</h1>
-              <div className='totalMes flex-end ml-auto'>
-                <TotalCosts />
-                <h1 className='text-sm text-left'>Total</h1>
-              </div>
-            </div>
-            <div className='chartContainer h-[150px] w-full mb-2 flex relative items-center justify-center align-center'>
-              {/* <Barras /> */}
-              <PorTipo/>
-            </div>
-            <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>
-              <div className='listContainerHead w-full h-5 mb-2 flex flex-row'>
-                <h3 className='font-semibold'>Últimas 10 Despesas</h3>
-                
-              </div>
-              <div>
-              </div>
-              <div className='listSeparator w-[100%] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto mb-2'>
-              </div>
-              <div className='w-full absolute z-[10]'>
-                <ModalAdd />
-              </div>
-              <div className=''>
-                <List />
-              </div>
-            </div>
-            {/* <div className='left-[50%] absolute'>
-              <FontAwesomeIcon icon={faAnglesDown} className='text-2xl' color='#1e2229'/>
-            </div> */}
-          </div>
-        </div>
-        <div className='rightSection bg-slate-50 h-[90%] w-1/4 rounded-r-xl p-10'>
-          <div className='rightTopContainer flex flex-col'>
-            <h1 className='text-xl font-semibold mt-3 opacity-90'>Distribuição das Despesas</h1>
-            <h2 className='text-sm text-left'>Total</h2>
-          </div>
-          <div className='w-[100%] h-[90%] pt-5'>
-            <Distribuicao />
-          </div>
-        </div>
-      </div>
-      <footer className='absolute bottom-0'>
+        <footer className='absolute bottom-0'>
         <h2>Desenvolvido por Emanuel Vidal em Vortex @ UNIFOR 2023</h2>
       </footer>
     </main>
-  )
-}
+  )}
