@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import TotalCosts from './totalcosts'
 import List from './list'
 import ImageComponent from './avatar'
@@ -7,10 +5,25 @@ import ModalAdd from './modaladd'
 import Distribuicao from './distribuicao'
 import CurrentDate from './currentdate'
 import PorTipo from './portipo'
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react'
 
 export const myIp = '172.18.9.236';
 
 export default function Main() {
+  const [token, setToken] = useState('');
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken)
+    } else {
+      router.push('/');
+    }
+  }, []);
+
   return (
     <main className='items-center flex justify-center h-screen'>
       <div className='bg-[#1e2229] drop-shadow-xl rounded-xl items-center flex justify-center pl-10 pr-10 h-[90%] w-[90%]'>
@@ -32,17 +45,16 @@ export default function Main() {
               <h1 className='text-3xl'>Despesas</h1>
               <div className='totalMes flex-end ml-auto'>
                 <TotalCosts />
-                <h1 className='text-sm text-left'>Total</h1>
+                <h1 className='text-sm text-left'>{token}</h1>
               </div>
             </div>
             <div className='chartContainer h-[150px] w-full mb-2 flex relative items-center justify-center align-center'>
-              {/* <Barras /> */}
-              <PorTipo/>
+              <PorTipo />
             </div>
             <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>
               <div className='listContainerHead w-full h-5 mb-2 flex flex-row'>
                 <h3 className='font-semibold'>Últimas 10 Despesas</h3>
-                
+
               </div>
               <div>
               </div>
@@ -55,9 +67,6 @@ export default function Main() {
                 <List />
               </div>
             </div>
-            {/* <div className='left-[50%] absolute'>
-              <FontAwesomeIcon icon={faAnglesDown} className='text-2xl' color='#1e2229'/>
-            </div> */}
           </div>
         </div>
         <div className='rightSection bg-slate-50 h-[90%] w-1/4 rounded-r-xl p-10'>
