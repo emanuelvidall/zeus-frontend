@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import 'animate.css';
 import { TextField } from '@mui/material';
 import { useRouter } from 'next/router';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import swal from 'sweetalert';
 
@@ -14,7 +17,10 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [token, setToken] = useState('');
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const router = useRouter();
 
@@ -34,7 +40,7 @@ export default function Login() {
         localStorage.setItem('token', data.token)
         console.log(data)
         if (data.token) {
-          router.push('/main')
+          router.push('/MainPage')
         }
       })
       .catch(error => {
@@ -54,11 +60,14 @@ export default function Login() {
             <div className='mt-5 items-center flex flex-col'>
               <h1 className='font-bold text-sm self-start ml-32 md:ml-11'>Login</h1>
               <form>
-                <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc loginInput" onChange={(e) => { setEmail(e.target.value) }} className='focus:border-blue-500' placeholder='utilize seu email' label="" variant="outlined" />
+                <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc" onChange={(e) => { setEmail(e.target.value) }} className='emailInput' placeholder='utilize seu email' label="" variant="outlined" />
               </form>
               <h1 className='font-bold text-sm self-start ml-32 mt-5 md:ml-11'>Password</h1>
               <form>
-                <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc passInput" onChange={(e) => { setPassword(e.target.value) }} className='focus:border-blue-500 focus:border' placeholder='digite sua senha' label="" variant="outlined" />
+                <div className='flex'>
+                  <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc" onChange={(e) => { setPassword(e.target.value) }} className='passInput' placeholder='digite sua senha' label="" variant="outlined" type={showPassword?'text':'password'} />
+                  {showPassword ? <button type='button' onClick={()=> setShowPassword(!showPassword)}><FontAwesomeIcon className='relative top-0 right-10' icon={faEye}/></button> : <button type='button' onClick={()=>setShowPassword(!showPassword)}><FontAwesomeIcon className='relative top-0 right-10' icon={faEyeSlash} /></button>}
+                </div>
               </form>
               <h1 className='text-blue-500 text-xs underline hover:cursor-pointer mt-5'>Esqueci minha senha</h1>
               <div className='flex flex-row mt-10'>

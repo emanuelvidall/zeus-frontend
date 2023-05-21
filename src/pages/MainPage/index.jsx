@@ -1,10 +1,10 @@
-import TotalCosts from './totalcosts'
-import List from './list'
-import ImageComponent from './avatar'
-import ModalAdd from './modaladd'
-import Distribuicao from './distribuicao'
-import CurrentDate from './currentdate'
-import PorTipo from './portipo'
+import TotalCosts from '../totalcosts'
+import List from '../list'
+import ImageComponent from '../avatar'
+import ModalAdd from '../modaladd'
+import Distribuicao from '../distribuicao'
+import CurrentDate from '../currentdate'
+import PorTipo from '../portipo'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react'
 
