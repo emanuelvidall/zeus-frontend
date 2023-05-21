@@ -33,7 +33,9 @@ function handleLogin(email: string, password: string){
     console.log('esse é o token:___________', data.token)
     localStorage.setItem(token, data.token)
     console.log(data)
-    router.push('/main')
+    if (data.token){
+      router.push('/main')
+    }
   })
   .catch(error => {
     console.error(error);
