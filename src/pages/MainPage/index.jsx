@@ -1,4 +1,4 @@
-import TotalCosts from '../totalcosts'
+import TotalValue from '../TotalValue'
 import List from '../list'
 import ImageComponent from '../avatar'
 import ModalAdd from '../modaladd'
@@ -9,24 +9,57 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent} from '@mui/material' 
 
 export default function MainPage() {
   const [token, setToken] = useState('');
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [userDog, setUserDog] = useState('');
   const [userId, setUserId] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [month, setMonth] = useState(0);
 
   const router = useRouter();
+
+  const userCheck = async (userId) => {
+    try{
+      const response = await fetch(`http://172.18.9.236:3001/users/view/${userId}`, {
+        method: GET,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+       if (data._id != userId){
+        router.push("/")
+       } 
+      })
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  const handleChange = (e) => {
+    setMonth(e.target.value)
+    console.log(month)
+  }
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     const storedId = localStorage.getItem('id');
     console.log('tokenzim:__________', storedToken);
     console.log('idzim:__________', storedId);
-    if (storedToken) {
+    if (storedToken ) {
       setToken(storedToken);
       setUserId(storedId);
       getUserData(storedId);
+      setIsLoading(false);
+      userCheck(userId);
     } else {
       router.push('/');
     }
@@ -44,6 +77,7 @@ export default function MainPage() {
       .then(data => {
         setUserName(data.name);
         setUserEmail(data.email);
+        setUserDog(data.dog);
       })
       .catch(error => {
         console.error(error);
@@ -52,45 +86,67 @@ export default function MainPage() {
 
 
   const userNameUpperCase = (userName) => {
-    return userName.charAt(0).toUpperCase()+userName.slice(1);
+    return userName.charAt(0).toUpperCase() + userName.slice(1);
+  }
+
+  function logout() {
+    localStorage.clear();
+    router.push("/");
   }
 
   return (
     <main className='items-center flex justify-center h-screen'>
       <div className='bg-[#1e2229] drop-shadow-xl rounded-xl items-center flex justify-center pl-10 pr-10 h-[90%] w-[90%]'>
-        <div className='leftSection bg-red-500 h-[90%] w-1/6 mr-10 rounded-xl p-5'>
-          <div className='bg-black h-[50%]'>
-            <div className='avatarSection h-20 w-30'>
-              <div className='secaoUser'>
-                <div className='userIcon rounded-full bg-white w-6 h-fit text-center mb-2'>
-                  <FontAwesomeIcon icon={faUser} color='#1e2229' />
-                </div>
-                <div className='text-white mb-5'>
-                  <h1>Olá {userNameUpperCase(userName)}</h1>
-                  <h1>{userEmail}</h1>
-                </div>
+        <div className='leftSection bg-white h-[90%] w-1/6 mr-10 rounded-xl p-5 flex flex-col'>
+          
+            <div className='secaoUser flex flex-row justify-center'>
+              <div className='text-black mb-5 ml-2 flex flex-col items-center justify-center'>
+                <FontAwesomeIcon className='mb-2' icon={faUser} color='#1e2229' size='6x' />
+                <h1>Olá <span className='text-xl font-bold'>{userNameUpperCase(userName)}</span></h1>
+                <h1>{userEmail}</h1>
               </div>
-              <h1 className='text-white'>Seu aumigo é:</h1>
-              <div className='secaoDog'>
-                <ImageComponent />
-                <h1 className='text-zinc-50 text-3xl mt-5 mb-1'>Zeus</h1>
-                <h3 className='text-neutral-500 text-base'>Border Collie</h3>
-                <h3 className='text-neutral-500 text-base'>18kg</h3>
-                <h3 className='text-neutral-500 text-base'>2 anos</h3>
-              </div>
-              <button type='button' className='w-[fit] absolute bottom-11 text-sm px-2 h-[30px] bg-[#DC3434] rounded-md text-white transition-all duration-500 ease-in-out hover:scale-110 hover:shadow-lg'>Encerrar Sessão</button>
+            </div>
+            <h1 className='text-black opacity-70 text-center'>🐶 Seu aumigo é:</h1>
+            <div className='secaoDog flex flex-col items-center justify-center'>
+              <h1 className='text-black text-3xl mt-5 mb-1'>{userNameUpperCase(userDog)}</h1>
+              <ImageComponent />
+            </div>
+            <div className='buttonDiv flex justify-center mt-80'>
+              <button type='button' onClick={() => logout()} className='w-[fit] self-center text-sm px-2 h-[30px] bg-[#DC3434] rounded-md text-white transition-all duration-500 ease-in-out hover:scale-110 hover:shadow-lg'>Encerrar Sessão</button>
             </div>
             <div className='listSection mt-20 text-neutral-500 text-2xl space-y-10 flex flex-col'>
             </div>
-          </div>
+          
         </div>
         <div className='middleSection bg-white h-[90%] w-1/2 rounded-l-xl flex justify-center items-center p-10'>
           <div className='w-[95%] h-[100%]'>
             <CurrentDate />
             <div className='topContainer flex flex-row'>
-              <h1 className='text-3xl'>Despesas</h1>
+              <h1 className='text-3xl'>Despesas em <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                                                      <InputLabel id="demo-simple-select-label">Mês</InputLabel>
+                                                      <Select
+                                                        labelId="demo-simple-select-label"
+                                                        id="demo-simple-select"
+                                                        value={month}
+                                                        label="Mês"
+                                                        onChange={handleChange}
+                                                      >
+                                                        <MenuItem value={1}>Janeiro</MenuItem>
+                                                        <MenuItem value={2}>Fevereiro</MenuItem>
+                                                        <MenuItem value={3}>Marco</MenuItem>
+                                                        <MenuItem value={4}>Abril</MenuItem>
+                                                        <MenuItem value={5}>Maio</MenuItem>
+                                                        <MenuItem value={6}>Junho</MenuItem>
+                                                        <MenuItem value={7}>Julho</MenuItem>
+                                                        <MenuItem value={8}>Agosto</MenuItem>
+                                                        <MenuItem value={9}>Setembro</MenuItem>
+                                                        <MenuItem value={10}>Outubro</MenuItem>
+                                                        <MenuItem value={11}>Novembro</MenuItem>
+                                                        <MenuItem value={12}>Dezembro</MenuItem>
+                                                      </Select>
+                                                    </FormControl></h1>
               <div className='totalMes flex-end ml-auto'>
-                <TotalCosts />
+                {isLoading ? <h1>carregando</h1> : <TotalValue userId={userId} /> }
                 <h1 className='text-sm text-left'></h1>
               </div>
             </div>
