@@ -58,26 +58,28 @@ export default function MainPage() {
   return (
     <main className='items-center flex justify-center h-screen'>
       <div className='bg-[#1e2229] drop-shadow-xl rounded-xl items-center flex justify-center pl-10 pr-10 h-[90%] w-[90%]'>
-        <div className='leftSection bg-zinc-950 h-[40%] w-1/6 mr-10 rounded-xl p-5'>
-          <div className='avatarSection h-20 w-30'>
-            <div className='secaoUser'>
-              <div className='userIcon rounded-full bg-white w-6 h-fit text-center'>
-                <FontAwesomeIcon icon={faUser} color='#1e2229' />
+        <div className='leftSection bg-red-500 h-[90%] w-1/6 mr-10 rounded-xl p-5'>
+          <div className='bg-black h-[50%]'>
+            <div className='avatarSection h-20 w-30'>
+              <div className='secaoUser'>
+                <div className='userIcon rounded-full bg-white w-6 h-fit text-center mb-2'>
+                  <FontAwesomeIcon icon={faUser} color='#1e2229' />
+                </div>
+                <div className='text-white mb-5'>
+                  <h1>Olá {userNameUpperCase(userName)}</h1>
+                  <h1>{userEmail}</h1>
+                </div>
               </div>
-              <div className='text-white mb-5'>
-                <h1>Olá {userNameUpperCase(userName)}</h1>
-                <h1>{userEmail}</h1>
+              <h1 className='text-white'>Seu aumigo é:</h1>
+              <div className='secaoDog'>
+                <ImageComponent />
+                <h1 className='text-zinc-50 text-3xl mt-5 mb-1'>Zeus</h1>
+                <h3 className='text-neutral-500 text-base'>Border Collie</h3>
+                <h3 className='text-neutral-500 text-base'>18kg</h3>
+                <h3 className='text-neutral-500 text-base'>2 anos</h3>
               </div>
+              <button type='button' className='w-[fit] absolute bottom-11 text-sm px-2 h-[30px] bg-[#DC3434] rounded-md text-white transition-all duration-500 ease-in-out hover:scale-110 hover:shadow-lg'>Encerrar Sessão</button>
             </div>
-            <h1 className='text-white'>Seu aumigo é:</h1>
-            <div className='secaoDog'>
-              <ImageComponent />
-              <h1 className='text-zinc-50 text-3xl mt-5 mb-1'>Zeus</h1>
-              <h3 className='text-neutral-500 text-base'>Border Collie</h3>
-              <h3 className='text-neutral-500 text-base'>18kg</h3>
-              <h3 className='text-neutral-500 text-base'>2 anos</h3>
-            </div>
-            <button type='button' className='w-[fit] absolute bottom-11 text-sm px-2 h-[30px] bg-[#DC3434] rounded-md text-white transition-all duration-500 ease-in-out hover:scale-110 hover:shadow-lg'>Encerrar Sessão</button>
             <div className='listSection mt-20 text-neutral-500 text-2xl space-y-10 flex flex-col'>
             </div>
           </div>
