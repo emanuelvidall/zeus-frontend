@@ -6,14 +6,15 @@ import { InputAdornment, MenuItem, TextField } from '@mui/material';
 import DatePickerMui from './datepickermui';
 import swal from 'sweetalert';;
 
-const ModalAdd = () => {
+const ModalAdd = (props) => {
     const [showModal, setShowModal] = useState(false);
     const [desc, setDesc] = useState('');
     const [date, setDate] = useState('');
     const [type, setType] = useState('');
     const [value, setValue] = useState(0);
     const [quantity, setQuantity] = useState(0);
-    const [userId, setUserId] = useState(localStorage.getItem('id'));
+
+    const userId = props.userId;
 
     const currentDate = new Date();
 
@@ -71,18 +72,17 @@ const ModalAdd = () => {
         },
     ]
 
-    const dados = { value, type, quantity, desc, date, userId }
-    const url = '/novocusto';
+    const dados = { value, type, quantity, desc, date, month, userId }
 
     console.log(JSON.stringify(dados))
 
-    function postData(url, dados) {
+    function postData(dados) {
 
         if (!dados.value || !dados.type || !dados.quantity || !dados.desc || !dados.date || !dados.userId) {
             swal("Oops!", "Preencha todos os campos para adicionar sua despesa", "error");
             return;
         }
-        return fetch(`http://${myIp}:3001${url}`, {
+        return fetch('http://172.18.9.236:3001/expenses/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -158,7 +158,7 @@ const ModalAdd = () => {
                                 <button
                                     type="button"
                                     className="mt-5 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm hover:scale-110 transition-all duration-300 ease-in-out mb-2"
-                                    onClick={() => postData(url, dados)}
+                                    onClick={() => postData(dados)}
                                 >
                                     Adicionar
                                 </button>

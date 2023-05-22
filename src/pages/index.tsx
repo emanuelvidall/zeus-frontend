@@ -7,12 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import swal from 'sweetalert';
 
-
+export const myIp = '172.18.9.236';
 
 export default function Login() {
-
-
-  const myIp = '172.18.9.236';
 
   interface Login {
     email: string;
@@ -31,7 +28,7 @@ export default function Login() {
 
   function handleLogin(email: string, password: string) {
 
-    const url = 'http://localhost:3001/auth/login';
+    const url = 'http://172.18.9.236:3001/auth/login';
     console.log('posting: ', email, password)
     fetch(url, {
       method: 'POST',

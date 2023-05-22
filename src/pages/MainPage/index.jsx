@@ -7,16 +7,18 @@ import CurrentDate from '../currentdate'
 import PorTipo from '../portipo'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react'
+import myIp from './index'
 
 export default function MainPage() {
   const [token, setToken] = useState('');
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [userId, setUserId] = useState(localStorage.getItem('id'));
 
   const router = useRouter();
 
   function getUserData(id){
-    const url = `http://localhost:3001/users/view/${id}`
+    const url = 'http://172.18.9.236:3001/users/view/${id}'
     fetch(url, {
       method: 'GET',
       headers: {
@@ -58,6 +60,7 @@ export default function MainPage() {
             <h3 className='text-neutral-500 text-base'>2 anos</h3>
             <h1>Olá {userName}</h1>
             <h1>{userEmail}</h1>
+            <h1>{userId}</h1>
             <button type='button'>deslogar</button>
             <div className='listSection mt-20 text-neutral-500 text-2xl space-y-10 flex flex-col'>
             </div>
@@ -86,7 +89,7 @@ export default function MainPage() {
               <div className='listSeparator w-[100%] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto mb-2'>
               </div>
               <div className='w-full absolute z-[10] md:w-[400px]'>
-                <ModalAdd />
+                <ModalAdd userId={userId}/>
               </div>
               <div className=''>
                 <List />
