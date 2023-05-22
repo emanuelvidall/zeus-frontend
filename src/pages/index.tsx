@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'animate.css';
 import { TextField } from '@mui/material';
 import { useRouter } from 'next/router';
@@ -44,6 +44,10 @@ export default function Login() {
         console.error(error);
       });
   }
+
+  useEffect(()=> {
+    localStorage.clear();
+  }, [])
 
   return (
     <main className='items-center flex justify-center h-screen'>

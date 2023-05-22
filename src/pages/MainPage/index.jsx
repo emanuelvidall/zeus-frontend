@@ -7,6 +7,8 @@ import CurrentDate from '../currentdate'
 import PorTipo from '../portipo'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function MainPage() {
   const [token, setToken] = useState('');
@@ -16,29 +18,11 @@ export default function MainPage() {
 
   const router = useRouter();
 
-  function getUserData(id){
-    const url = 'http://172.18.9.236:3001/users/view/${id}'
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    }).then(response => response.json())
-      .then(data => {
-        console.log('____________aq__________',data);
-        setUserName(data.name);
-        setUserEmail(data.email);
-      })
-      .catch(error => {
-        console.error('_________errozim_____________',error);
-      });
-  }
-
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     const storedId = localStorage.getItem('id');
     console.log('tokenzim:__________', storedToken);
-    console.log('idzim:__________', storedId);  
+    console.log('idzim:__________', storedId);
     if (storedToken) {
       setToken(storedToken);
       setUserId(storedId);
@@ -48,20 +32,52 @@ export default function MainPage() {
     }
   }, []);
 
+
+  function getUserData(userId) {
+    const url = `http://172.18.9.236:3001/users/view/${userId}`;
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(response => response.json())
+      .then(data => {
+        setUserName(data.name);
+        setUserEmail(data.email);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+
+  const userNameUpperCase = (userName) => {
+    return userName.charAt(0).toUpperCase()+userName.slice(1);
+  }
+
   return (
     <main className='items-center flex justify-center h-screen'>
       <div className='bg-[#1e2229] drop-shadow-xl rounded-xl items-center flex justify-center pl-10 pr-10 h-[90%] w-[90%]'>
-        <div className='leftSection bg-zing-950s h-5/6 w-1/6 mr-10 rounded-xl'>
+        <div className='leftSection bg-zinc-950 h-[40%] w-1/6 mr-10 rounded-xl p-5'>
           <div className='avatarSection h-20 w-30'>
-            <ImageComponent />
-            <h1 className='text-zinc-50 text-3xl mt-5 mb-1'>Zeus</h1>
-            <h3 className='text-neutral-500 text-base'>Border Collie</h3>
-            <h3 className='text-neutral-500 text-base'>18kg</h3>
-            <h3 className='text-neutral-500 text-base'>2 anos</h3>
-            <h1>Olá {userName}</h1>
-            <h1>{userEmail}</h1>
-            <h1>{userId}</h1>
-            <button type='button'>deslogar</button>
+            <div className='secaoUser'>
+              <div className='userIcon rounded-full bg-white w-6 h-fit text-center'>
+                <FontAwesomeIcon icon={faUser} color='#1e2229' />
+              </div>
+              <div className='text-white mb-5'>
+                <h1>Olá {userNameUpperCase(userName)}</h1>
+                <h1>{userEmail}</h1>
+              </div>
+            </div>
+            <h1 className='text-white'>Seu aumigo é:</h1>
+            <div className='secaoDog'>
+              <ImageComponent />
+              <h1 className='text-zinc-50 text-3xl mt-5 mb-1'>Zeus</h1>
+              <h3 className='text-neutral-500 text-base'>Border Collie</h3>
+              <h3 className='text-neutral-500 text-base'>18kg</h3>
+              <h3 className='text-neutral-500 text-base'>2 anos</h3>
+            </div>
+            <button type='button' className='w-[fit] absolute bottom-11 text-sm px-2 h-[30px] bg-[#DC3434] rounded-md text-white transition-all duration-500 ease-in-out hover:scale-110 hover:shadow-lg'>Encerrar Sessão</button>
             <div className='listSection mt-20 text-neutral-500 text-2xl space-y-10 flex flex-col'>
             </div>
           </div>
