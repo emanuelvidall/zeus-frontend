@@ -150,7 +150,7 @@ export default function MainPage() {
               </div>
             </div>
             <div className='chartContainer h-[150px] w-full mb-2 flex relative items-center justify-center align-center'>
-              <PorTipo month={month} userId={userId}/>
+              <PorTipo month={month} userId={userId} />
             </div>
             <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>
               <div className='listContainerHead w-full h-5 mb-2 flex flex-row'>
