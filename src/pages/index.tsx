@@ -65,8 +65,8 @@ export default function Login() {
               <h1 className='font-bold text-sm self-start ml-32 mt-5 md:ml-11'>Password</h1>
               <form>
                 <div className='flex'>
-                  <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc" onChange={(e) => { setPassword(e.target.value) }} className='passInput' placeholder='digite sua senha' label="" variant="outlined" type={showPassword?'text':'password'} />
-                  {showPassword ? <button type='button' onClick={()=> setShowPassword(!showPassword)}><FontAwesomeIcon className='relative top-0 right-10' icon={faEye}/></button> : <button type='button' onClick={()=>setShowPassword(!showPassword)}><FontAwesomeIcon className='relative top-0 right-10' icon={faEyeSlash} /></button>}
+                  <TextField size='small' sx={{ m: 1, width: '25ch' }} id="outlined-basic desc" onChange={(e) => { setPassword(e.target.value) }} className='passInput ml-10' placeholder='digite sua senha' label="" variant="outlined" type={showPassword?'text':'password'} />
+                  {showPassword ? <div className='w-[30px] h-[35px] relative top-3 right-10 flex flex-col items-center justify-center'><button type='button' onClick={()=> setShowPassword(!showPassword)}><FontAwesomeIcon className='opacity-50' icon={faEye}/></button></div> : <div className='w-[30px] h-[35px] relative top-3 right-10 flex flex-col items-center justify-center'><button type='button' onClick={()=>setShowPassword(!showPassword)}><FontAwesomeIcon className='opacity-50' icon={faEyeSlash} /></button></div>}
                 </div>
               </form>
               <h1 className='text-blue-500 text-xs underline hover:cursor-pointer mt-5'>Esqueci minha senha</h1>
