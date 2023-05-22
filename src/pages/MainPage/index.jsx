@@ -18,9 +18,11 @@ export default function MainPage() {
   const [userDog, setUserDog] = useState('');
   const [userId, setUserId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [month, setMonth] = useState(0);
+  const [month, setMonth] = useState(null);
 
   const router = useRouter();
+  
+  const currentDate = new Date();
 
   const userCheck = async (userId) => {
     try{
@@ -46,20 +48,18 @@ export default function MainPage() {
 
   const handleChange = (e) => {
     setMonth(e.target.value)
-    console.log(month)
   }
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     const storedId = localStorage.getItem('id');
-    console.log('tokenzim:__________', storedToken);
-    console.log('idzim:__________', storedId);
     if (storedToken ) {
       setToken(storedToken);
       setUserId(storedId);
       getUserData(storedId);
       setIsLoading(false);
       userCheck(userId);
+      setMonth(currentDate.getMonth()+1);
     } else {
       router.push('/');
     }
@@ -122,14 +122,13 @@ export default function MainPage() {
           <div className='w-[95%] h-[100%]'>
             <CurrentDate />
             <div className='topContainer flex flex-row'>
-              <h1 className='text-3xl'>Despesas em <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                                                      <InputLabel id="demo-simple-select-label">Mês</InputLabel>
+              <h1 className='text-3xl'>Total de Despesas em <FormControl className='mt-0' sx={{ m: 1, minWidth: 120 }} size="small">
                                                       <Select
                                                         labelId="demo-simple-select-label"
                                                         id="demo-simple-select"
                                                         value={month}
-                                                        label="Mês"
                                                         onChange={handleChange}
+                                                        defaultValue={month}
                                                       >
                                                         <MenuItem value={1}>Janeiro</MenuItem>
                                                         <MenuItem value={2}>Fevereiro</MenuItem>
@@ -146,12 +145,12 @@ export default function MainPage() {
                                                       </Select>
                                                     </FormControl></h1>
               <div className='totalMes flex-end ml-auto'>
-                {isLoading ? <h1>carregando</h1> : <TotalValue userId={userId} /> }
+                {isLoading ? <h1>carregando</h1> : <TotalValue userId={userId} month={month} /> }
                 <h1 className='text-sm text-left'></h1>
               </div>
             </div>
             <div className='chartContainer h-[150px] w-full mb-2 flex relative items-center justify-center align-center'>
-              <PorTipo />
+              <PorTipo month={month} userId={userId}/>
             </div>
             <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>
               <div className='listContainerHead w-full h-5 mb-2 flex flex-row'>
@@ -166,7 +165,7 @@ export default function MainPage() {
                 <ModalAdd userId={userId} />
               </div>
               <div className=''>
-                <List />
+                <List month={month}/>
               </div>
             </div>
           </div>

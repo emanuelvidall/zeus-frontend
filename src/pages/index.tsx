@@ -25,7 +25,6 @@ export default function Login() {
   function handleLogin(email: string, password: string) {
 
     const url = 'http://172.18.9.236:3001/auth/login';
-    console.log('posting: ', email, password)
     fetch(url, {
       method: 'POST',
       headers: {

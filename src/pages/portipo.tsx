@@ -4,24 +4,20 @@ import { myIp } from '.';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css'
 
-const PorTipo = () => {
+const PorTipo = (props) => {
     const [data, setData] = useState([])
-    // const [dadosRacao, setDadosRacao] = useState([])
-    // const [dadosBanho, setDadosBanho] = useState([])
-    // const [dadosShop, setDadosShop] = useState([])
-    // const [dadosClinica, setDadosClinica] = useState([])
+    const [dadosRacao, setDadosRacao] = useState(0)
+    const [dadosBanho, setDadosBanho] = useState(0)
+    const [dadosShop, setDadosShop] = useState(0)
+    const [dadosClinica, setDadosClinica] = useState(0)
+
+    const month = props.month;
+    const userId = props.userId;
 
     async function getData(){
         try {
-                const response = await fetch(`http://${myIp}:3001/todoscustos`)
-                const json = await response.json();
-                console.log('DADOOOOOOOS', json)
-                setData(json)
-                const marco = json.filter(item => item.data.slice(3, 5) === "03");
-                console.log('MARCOOOOOOOOO', marco)
-                const maio = json.filter(item => item.data.slice(3, 5) === "05");
-                console.log('MAIOOOOOOOOOOSS', marco)
-               
+            const response = await fetch(`http://${myIp}:3001/expenses/month/${userId}/${month}`)
+                
         }catch(error){
             console.error('Erro fetching data', error)
         }

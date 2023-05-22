@@ -13,7 +13,7 @@ const ModalAdd = (props) => {
     const [type, setType] = useState('');
     const [value, setValue] = useState(0);
     const [quantity, setQuantity] = useState(0);
-    const [month, setMonth] = useState(null);
+    const [month, setMonth] = useState(0);
     
     const currentDate = new Date();
 
@@ -29,7 +29,6 @@ const ModalAdd = (props) => {
             month: '2-digit',
             year: 'numeric',
         })
-        console.log('data aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', formattedDate)
         const formattedMonth = formattedDate.slice(3,5)
         setDate(formattedDate.replace(/\//g, '-'))
         setMonth(formattedMonth)
@@ -74,8 +73,6 @@ const ModalAdd = (props) => {
 
     const dados = { value, type, quantity, desc, date, month, userId }
 
-    console.log('dadooooooooooooooooooooooos', JSON.stringify(dados))
-
     function postData(dados) {
 
         if (!dados.value || !dados.type || !dados.quantity || !dados.desc || !dados.date || !dados.userId) {
@@ -94,7 +91,6 @@ const ModalAdd = (props) => {
                     throw new Error('Network response was not ok');
                 }
                 response.json()
-                console.log('Success:', response);
                 swal("Adicionada!", "Sua despesa foi adicionada com sucesso", "success");
                 setDesc('');
                 setDate('')
