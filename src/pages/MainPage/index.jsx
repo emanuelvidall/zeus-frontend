@@ -6,14 +6,13 @@ import Distribuicao from '../distribuicao'
 import CurrentDate from '../currentdate'
 import PorTipo from '../portipo'
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react'
-import myIp from './index'
+import { useEffect, useState } from 'react';
 
 export default function MainPage() {
   const [token, setToken] = useState('');
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
-  const [userId, setUserId] = useState(localStorage.getItem('id'));
+  const [userId, setUserId] = useState('');
 
   const router = useRouter();
 
@@ -42,6 +41,7 @@ export default function MainPage() {
     console.log('idzim:__________', storedId);  
     if (storedToken) {
       setToken(storedToken);
+      setUserId(storedId);
       getUserData(storedId);
     } else {
       router.push('/');
@@ -89,7 +89,7 @@ export default function MainPage() {
               <div className='listSeparator w-[100%] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto mb-2'>
               </div>
               <div className='w-full absolute z-[10] md:w-[400px]'>
-                <ModalAdd userId={userId}/>
+                <ModalAdd userId={userId} />
               </div>
               <div className=''>
                 <List />

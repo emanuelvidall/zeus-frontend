@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
 import myIp from './index'
 import 'animate.css';
@@ -13,11 +13,11 @@ const ModalAdd = (props) => {
     const [type, setType] = useState('');
     const [value, setValue] = useState(0);
     const [quantity, setQuantity] = useState(0);
-
-    const userId = props.userId;
-
+    const [month, setMonth] = useState(null);
+    
     const currentDate = new Date();
 
+    const userId = props.userId;
 
     const handleDescChange = (e) => {
         setDesc(e.target.value);
@@ -30,7 +30,9 @@ const ModalAdd = (props) => {
             year: 'numeric',
         })
         console.log('data aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', formattedDate)
+        const formattedMonth = formattedDate.slice(3,5)
         setDate(formattedDate.replace(/\//g, '-'))
+        setMonth(formattedMonth)
     }
 
     const handleTipoChange = (e) => {
@@ -50,8 +52,6 @@ const ModalAdd = (props) => {
     useState(() => {
         handleDataChange(currentDate);
     }, []);
-
-    
 
     const tipos = [
         {
@@ -74,7 +74,7 @@ const ModalAdd = (props) => {
 
     const dados = { value, type, quantity, desc, date, month, userId }
 
-    console.log(JSON.stringify(dados))
+    console.log('dadooooooooooooooooooooooos', JSON.stringify(dados))
 
     function postData(dados) {
 
@@ -90,6 +90,9 @@ const ModalAdd = (props) => {
             body: JSON.stringify(dados)
         })
             .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
                 response.json()
                 console.log('Success:', response);
                 swal("Adicionada!", "Sua despesa foi adicionada com sucesso", "success");
