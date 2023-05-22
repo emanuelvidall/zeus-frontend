@@ -8,12 +8,8 @@ import PorTipo from '../portipo'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react'
 
-export const myIp = '172.18.9.236';
-
-
 export default function MainPage() {
   const [token, setToken] = useState('');
-  // const [user, setUser] = useState({});
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
 

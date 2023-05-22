@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import "react-datepicker/dist/react-datepicker.css";
-import { myIp } from '.';
+import myIp from './index'
 import 'animate.css';
 import { InputAdornment, MenuItem, TextField } from '@mui/material';
 import DatePickerMui from './datepickermui';
-import swal from 'sweetalert';
+import swal from 'sweetalert';;
 
 const ModalAdd = () => {
     const [showModal, setShowModal] = useState(false);
     const [desc, setDesc] = useState('');
-    const [data, setData] = useState('');
-    const [tipo, setTipo] = useState('');
-    const [valor, setValor] = useState(0);
-    const [quantidade, setQuantidade] = useState(0);
+    const [date, setDate] = useState('');
+    const [type, setType] = useState('');
+    const [value, setValue] = useState(0);
+    const [quantity, setQuantity] = useState(0);
+    const [userId, setUserId] = useState(localStorage.getItem('id'));
+
     const currentDate = new Date();
 
 
@@ -29,26 +29,28 @@ const ModalAdd = () => {
             year: 'numeric',
         })
         console.log('data aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', formattedDate)
-        setData(formattedDate.replace(/\//g, '-'))
+        setDate(formattedDate.replace(/\//g, '-'))
     }
 
     const handleTipoChange = (e) => {
-        setTipo(e.target.value)
+        setType(e.target.value)
     }
 
     const handleValorChange = (e) => {
         const input = e.target.value;
         const treatedInput = input.replace(/,/g, '.')
-        setValor(treatedInput)
+        setValue(treatedInput)
     }
 
     const handleQuantidadeChange = (e) => {
-        setQuantidade(e.target.value)
+        setQuantity(e.target.value)
     }
 
     useState(() => {
         handleDataChange(currentDate);
     }, []);
+
+    
 
     const tipos = [
         {
@@ -69,14 +71,14 @@ const ModalAdd = () => {
         },
     ]
 
-    const dados = { desc, data, tipo, valor, quantidade }
+    const dados = { value, type, quantity, desc, date, userId }
     const url = '/novocusto';
 
     console.log(JSON.stringify(dados))
 
     function postData(url, dados) {
 
-        if (!dados.desc || !dados.data || !dados.tipo || !dados.valor || !dados.quantidade) {
+        if (!dados.value || !dados.type || !dados.quantity || !dados.desc || !dados.date || !dados.userId) {
             swal("Oops!", "Preencha todos os campos para adicionar sua despesa", "error");
             return;
         }
@@ -92,10 +94,10 @@ const ModalAdd = () => {
                 console.log('Success:', response);
                 swal("Adicionada!", "Sua despesa foi adicionada com sucesso", "success");
                 setDesc('');
-                setData('')
-                setTipo('')
-                setQuantidade(0)
-                setValor(0)
+                setDate('')
+                setType('')
+                setQuantity(0)
+                setValue(0)
                 setShowModal(false)
             })
             .catch(error => {
@@ -108,12 +110,12 @@ const ModalAdd = () => {
             <button
                 type="button"
                 className="w-[fit] font-bold px-2 py-2 h-[30px] bg-[#22c55e] rounded-full text-white transition-all duration-500 pt-1 ease-in-out hover:scale-110 hover:shadow-lg"
-                onClick={() => setShowModal(true)}>+ Nova Despesa</button>
+                onClick={() => setShowModal(true)}>+ Nova Despesa </button>
 
             {showModal && (
                 <div className="w-[100%] z-10 h-[100%] fixed bg-slate-600/50 top-0 left-0 align-center flex items-center justify-center">
                     <div className="animate__animated animate__bounceInUp bg-white h-fit pb-10 w-1/3 rounded-xl pt-5">
-                        <h3 className="text-2xl font-medium text-gray-900 ml-5 mb-10 ">Adicione uma nova despesa 💸 </h3>
+                        <h3 className="text-2xl font-medium text-gray-900 ml-5 mb-10 ">Adicione uma nova despesa 💸 {userId}</h3>
                         <div className='justify-center flex flex-col items-center'>
                             <div>
                                 <form>

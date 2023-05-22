@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import 'animate.css';
 import { TextField } from '@mui/material';
 import { useRouter } from 'next/router';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import swal from 'sweetalert';
 
+
+
 export default function Login() {
+
+
+  const myIp = '172.18.9.236';
 
   interface Login {
     email: string;
