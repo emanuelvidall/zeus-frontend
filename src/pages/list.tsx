@@ -47,7 +47,7 @@ const CostList = () => {
 
     const intervalId = setInterval(() => {
         fetchData();
-    }, 2000);
+    }, 200000);
 
     
     return () => clearInterval(intervalId);
@@ -59,7 +59,7 @@ const CostList = () => {
 
 
     return (
-    <div className='listRender absolute h-[50%] w-[40%] pl-7 overflow-y-scroll pt-10'>
+    <div className='listRender absolute h-[50%] w-[40%] pl-7 overflow-y-scroll pt-10 md:h-[20%]'>
         {lastTenItems.map((item, index) => {
     return (
         <div key={item._id}  onMouseEnter={() => setHoverIndex(index)} onClick={() => handleModal(item)}

@@ -65,7 +65,7 @@ const Distribuicao = () => {
         getTotalCosts()
         const intervalId = setInterval(() => {
             getTotalCosts();
-        }, 2000);
+        }, 200000);
 
         return () => clearInterval(intervalId);
 

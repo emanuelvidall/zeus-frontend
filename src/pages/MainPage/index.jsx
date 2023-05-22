@@ -10,15 +10,41 @@ import { useEffect, useState } from 'react'
 
 export const myIp = '172.18.9.236';
 
-export default function Main() {
+
+export default function MainPage() {
   const [token, setToken] = useState('');
+  // const [user, setUser] = useState({});
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
 
   const router = useRouter();
 
+  function getUserData(id){
+    const url = `http://localhost:3001/users/view/${id}`
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(response => response.json())
+      .then(data => {
+        console.log('____________aq__________',data);
+        setUserName(data.name);
+        setUserEmail(data.email);
+      })
+      .catch(error => {
+        console.error('_________errozim_____________',error);
+      });
+  }
+
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
+    const storedId = localStorage.getItem('id');
+    console.log('tokenzim:__________', storedToken);
+    console.log('idzim:__________', storedId);  
     if (storedToken) {
-      setToken(storedToken)
+      setToken(storedToken);
+      getUserData(storedId);
     } else {
       router.push('/');
     }
@@ -34,6 +60,9 @@ export default function Main() {
             <h3 className='text-neutral-500 text-base'>Border Collie</h3>
             <h3 className='text-neutral-500 text-base'>18kg</h3>
             <h3 className='text-neutral-500 text-base'>2 anos</h3>
+            <h1>Olá {userName}</h1>
+            <h1>{userEmail}</h1>
+            <button type='button'>deslogar</button>
             <div className='listSection mt-20 text-neutral-500 text-2xl space-y-10 flex flex-col'>
             </div>
           </div>
@@ -45,7 +74,7 @@ export default function Main() {
               <h1 className='text-3xl'>Despesas</h1>
               <div className='totalMes flex-end ml-auto'>
                 <TotalCosts />
-                <h1 className='text-sm text-left'>{token}</h1>
+                <h1 className='text-sm text-left'></h1>
               </div>
             </div>
             <div className='chartContainer h-[150px] w-full mb-2 flex relative items-center justify-center align-center'>
@@ -60,7 +89,7 @@ export default function Main() {
               </div>
               <div className='listSeparator w-[100%] h-0.5 bg-black opacity-10 self-center ml-auto mr-auto mb-2'>
               </div>
-              <div className='w-full absolute z-[10]'>
+              <div className='w-full absolute z-[10] md:w-[400px]'>
                 <ModalAdd />
               </div>
               <div className=''>

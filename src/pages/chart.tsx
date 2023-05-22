@@ -39,7 +39,7 @@ const Barras = () => {
 
     const intervalId = setInterval(() => {
       fetchData();
-    }, 2000);
+    }, 200000);
 
     return () => clearInterval(intervalId);
   }, []);

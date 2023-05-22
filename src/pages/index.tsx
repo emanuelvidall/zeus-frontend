@@ -19,6 +19,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [token, setToken] = useState('');
+  const [userId, setUserId] = useState('');
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -38,6 +39,8 @@ export default function Login() {
       .then(data => {
         console.log('esse é o token:___________', data.token)
         localStorage.setItem('token', data.token)
+        localStorage.setItem('id', data.user._id)
+        setUserId(data._id)
         console.log(data)
         if (data.token) {
           router.push('/MainPage')
