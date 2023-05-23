@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel, VictoryTooltip } from 'victory';
-import moment from 'moment'; // You need to import 'moment' for it to work
-import { myIp } from '.';
+import moment from 'moment';
 
 const Barras = () => {
   const [data, setData] = useState([]);
@@ -10,7 +8,7 @@ const Barras = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://${myIp}:3001/todoscustos`);
+        const response = await fetch(`http://172.18.9.236:3001/todoscustos`);
         const json = await response.json();
 
         const monthlyData = json.reduce((accumulator, item) => {

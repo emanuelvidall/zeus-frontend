@@ -14,11 +14,11 @@ export default function PorTipo(props) {
     const userId = props.userId;
 
     const types = ['racao', 'banho', 'shop', 'clinica'];
-    const baseUrl = 'http://172.18.9.236:3001/expenses/month';
+    const baseUrl = 'http://localhost:3001/expenses/month';
 
     async function getData(type) {
         if (month!=null){
-        const response = await fetch(`${baseUrl}/${userId}/${month}/${type}`);
+        const response = await fetch(`http://172.18.9.236:3001/${userId}/${month}/${type}`);
         const data = await response.json();
         const typeTotal = data.reduce((total, expense) => total + expense.value, 0);
 

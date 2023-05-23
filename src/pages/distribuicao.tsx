@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css'
-import { myIp } from '.';
 
 const Distribuicao = () => {
     const [racaoTotal, setRacaoTotal] = useState<number | null>(null);
@@ -15,7 +14,7 @@ const Distribuicao = () => {
     useEffect(() => {
         const getTotalCosts = async () => {
             try {
-                const response = await fetch(`http://${myIp}:3001/todoscustos`, {
+                const response = await fetch(`http://172.18.9.236:3001/todoscustos`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

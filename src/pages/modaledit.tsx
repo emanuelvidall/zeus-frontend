@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons';
 import "react-datepicker/dist/react-datepicker.css";
-import { myIp } from '.';
 import 'animate.css';
 import { InputAdornment, MenuItem, TextField } from '@mui/material';
 import DatePickerMui from './datepickermui';
@@ -80,6 +77,7 @@ const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, onRequestExclude,
 
     const dados = { desc, data, tipo, valor, quantidade }
     const url = '/todoscustos/editar/';
+      
 
     function handleSave() {
 
@@ -90,14 +88,20 @@ const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, onRequestExclude,
             quantidade: newQuant === 0 ? quantidade : newQuant,
             data: newData === '' ? data : newData,
         };
+        
+        const authorizationToken = localStorage.getItem('token');
 
-        return fetch(`http://${myIp}:3001/todoscustos/editar/${_id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedDados)
-        })
+        const headers = {
+            'Authorization': authorizationToken
+        };
+
+        const requestOptions = {
+        method: 'PUT',
+        headers: headers,
+        body: JSON.stringify(updatedDados)
+        };
+
+        return fetch(`http://172.18.9.236:3001/todoscustos/editar/${_id}`, requestOptions)
             .then(response => {
                 response.json()
                 swal("Editada!", "Sua despesa foi editada com sucesso", "success");
@@ -115,7 +119,7 @@ const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, onRequestExclude,
 
 
     const handleDelete = () => {
-        fetch(`http://${myIp}:3001/costs/${_id}`, {
+        fetch(`http://localhost:3001/costs/${_id}`, {
             method: "DELETE",
         })
             .then((response) => response.json())

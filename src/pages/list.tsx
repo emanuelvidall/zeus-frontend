@@ -24,10 +24,22 @@ export default function ExpenseList(props) {
     const userId = props.userId;
     const month = props.month;
 
+    const authorizationToken = localStorage.getItem('token');
+
+    const headers = {
+        'Authorization': authorizationToken
+      };
+
+    const requestOptions = {
+    method: 'GET',
+    headers: headers
+    };
+      
+
     const fetchData = async () => {
         if (month!=null){
             try {
-                const response = await fetch(`http://localhost:3001/expenses/${userId}/${month}/list`);
+                const response = await fetch(`http://172.18.9.236:3001/expenses/${userId}/${month}/list`, requestOptions)
                 const json = await response.json();
                 const sortedData = json.sort((a, b) => {
                     const dateA = moment(a.date, 'DD-MM-YYYY').toDate();

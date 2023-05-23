@@ -8,10 +8,9 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FormControl, Select, MenuItem } from '@mui/material'
+import { FormControl, Select, MenuItem } from '@mui/material';
 
 export default function MainPage() {
-  const [token, setToken] = useState('');
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userDog, setUserDog] = useState('');
@@ -20,6 +19,32 @@ export default function MainPage() {
   const [month, setMonth] = useState(null);
 
   const router = useRouter();
+
+  async function validate() {
+    const authorizationToken = localStorage.getItem('item');
+    const headers = {
+      'Authorization': authorizationToken
+    };
+
+    const requestOptions = {
+      method: 'GET',
+      headers: headers
+    };
+
+    try {
+      const response = await fetch('http://172.18.9.236:3001/auth/validate', requestOptions);
+
+      if (response.ok) {
+        console.log('Token is valid');
+      } else {
+        console.log('Token is invalid');
+        router.push('/login');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
 
   const currentDate = new Date();
 
@@ -52,6 +77,7 @@ export default function MainPage() {
   }
 
   useEffect(() => {
+    validate();
     const storedToken = localStorage.getItem('token');
     const storedId = localStorage.getItem('id');
     if (storedToken) {
