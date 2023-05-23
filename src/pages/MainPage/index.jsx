@@ -2,7 +2,6 @@ import TotalValue from '../TotalValue'
 import List from '../list'
 import ImageComponent from '../avatar'
 import ModalAdd from '../modaladd'
-import Distribuicao from '../distribuicao'
 import CurrentDate from '../currentdate'
 import PorTipo from '../portipo'
 import { useRouter } from 'next/router';
@@ -18,31 +17,33 @@ export default function MainPage() {
   const [userDog, setUserDog] = useState('');
   const [userId, setUserId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [month, setMonth] = useState(0);
+  const [month, setMonth] = useState(null);
 
   const router = useRouter();
 
   const currentDate = new Date();
 
-  const userCheck = async (userId) => {
-    try {
-      const response = await fetch(`http://172.18.9.236:3001/users/view/${userId}`, {
-        method: GET,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        },
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data._id != userId) {
-            router.push("/")
-          }
+  async function userCheck(userId) {
+    if (month != null) {
+      try {
+        const response = await fetch(`http://172.18.9.236:3001/users/view/${userId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+            'Access-Control-Allow-Headers': 'Content-Type',
+          },
         })
-    } catch (error) {
-      console.error('Error:', error);
+          .then(response => response.json())
+          .then(data => {
+            if (data._id != userId) {
+              router.push("/")
+            }
+          })
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   }
 
@@ -122,28 +123,32 @@ export default function MainPage() {
           <div className='w-[95%] h-[100%]'>
             <CurrentDate />
             <div className='topContainer flex flex-row'>
-              <h1 className='text-3xl'>Total de Despesas em <FormControl className='mt-0' sx={{ m: 1, minWidth: 120 }} size="small">
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={month}
-                  onChange={handleChange}
-                  defaultValue={month}
-                >
-                  <MenuItem value={1}>Janeiro</MenuItem>
-                  <MenuItem value={2}>Fevereiro</MenuItem>
-                  <MenuItem value={3}>Marco</MenuItem>
-                  <MenuItem value={4}>Abril</MenuItem>
-                  <MenuItem value={5}>Maio</MenuItem>
-                  <MenuItem value={6}>Junho</MenuItem>
-                  <MenuItem value={7}>Julho</MenuItem>
-                  <MenuItem value={8}>Agosto</MenuItem>
-                  <MenuItem value={9}>Setembro</MenuItem>
-                  <MenuItem value={10}>Outubro</MenuItem>
-                  <MenuItem value={11}>Novembro</MenuItem>
-                  <MenuItem value={12}>Dezembro</MenuItem>
-                </Select>
-              </FormControl></h1>
+              <div>
+                {month != null && (
+                <h1 className='text-3xl'>Total de Despesas em <FormControl className='mt-0' sx={{ m: 1, minWidth: 120 }} size="small">
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={month}
+                    onChange={handleChange}
+                    defaultValue={month}
+                  >
+                    <MenuItem value={1}>Janeiro</MenuItem>
+                    <MenuItem value={2}>Fevereiro</MenuItem>
+                    <MenuItem value={3}>Marco</MenuItem>
+                    <MenuItem value={4}>Abril</MenuItem>
+                    <MenuItem value={5}>Maio</MenuItem>
+                    <MenuItem value={6}>Junho</MenuItem>
+                    <MenuItem value={7}>Julho</MenuItem>
+                    <MenuItem value={8}>Agosto</MenuItem>
+                    <MenuItem value={9}>Setembro</MenuItem>
+                    <MenuItem value={10}>Outubro</MenuItem>
+                    <MenuItem value={11}>Novembro</MenuItem>
+                    <MenuItem value={12}>Dezembro</MenuItem>
+                  </Select>
+                </FormControl></h1>
+                )}
+              </div>
               <div className='totalMes flex-end ml-auto'>
                 {isLoading ? <h1>carregando</h1> : <TotalValue userId={userId} month={month} />}
                 <h1 className='text-sm text-left'></h1>
@@ -154,7 +159,7 @@ export default function MainPage() {
             </div>
             <div className='listContainer w-[100%] h-[50%] top-0 pl-5 pr-5'>
               <div className='listContainerHead w-full h-5 mb-2 flex flex-row'>
-                <h3 className='font-semibold'>Últimas 10 Despesas</h3>
+                <h3 className='font-semibold'>Lista de Despesas</h3>
 
               </div>
               <div>
@@ -176,7 +181,6 @@ export default function MainPage() {
             <h2 className='text-sm text-left'>Total</h2>
           </div>
           <div className='w-[100%] h-[90%] pt-5'>
-            <Distribuicao />
           </div>
         </div>
       </div>

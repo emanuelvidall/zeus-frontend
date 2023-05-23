@@ -24,12 +24,11 @@ export default function ExpenseList(props) {
     const userId = props.userId;
     const month = props.month;
 
-    useEffect(() => {
-        const fetchData = async () => {
+    const fetchData = async () => {
+        if (month!=null){
             try {
                 const response = await fetch(`http://localhost:3001/expenses/${userId}/${month}/list`);
                 const json = await response.json();
-                console.log('response jsoN!', json)
                 const sortedData = json.sort((a, b) => {
                     const dateA = moment(a.date, 'DD-MM-YYYY').toDate();
                     const dateB = moment(b.date, 'DD-MM-YYYY').toDate();
@@ -40,6 +39,9 @@ export default function ExpenseList(props) {
                 console.error('An error occurred', error);
             }
         };
+    }
+
+    useEffect(() => {
 
         fetchData();
 
@@ -81,7 +83,7 @@ export default function ExpenseList(props) {
                             </div>
                             <div className='flex flex-col ml-4'>
                                 <p className='text-lg'>{item.desc}</p>
-                                <p className='text-black opacity-50 text-sm'>{item.data}</p>
+                                <p className='text-black opacity-50 text-sm'>{item.date}</p>
                             </div>
                         </div>
                         <div className='rightPart ml-auto'>

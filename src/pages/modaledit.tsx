@@ -38,7 +38,6 @@ const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, onRequestExclude,
             month: '2-digit',
             year: 'numeric',
         })
-        console.log('data aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', formattedDate)
         setNewData(formattedDate.replace(/\//g, '-'))
     }
 
@@ -82,8 +81,6 @@ const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, onRequestExclude,
     const dados = { desc, data, tipo, valor, quantidade }
     const url = '/todoscustos/editar/';
 
-    console.log(JSON.stringify(dados))
-
     function handleSave() {
 
         const updatedDados = {
@@ -118,21 +115,18 @@ const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, onRequestExclude,
 
 
     const handleDelete = () => {
-            fetch(`http://${myIp}:3001/costs/${_id}`, {
+        fetch(`http://${myIp}:3001/costs/${_id}`, {
             method: "DELETE",
-            })
+        })
             .then((response) => response.json())
             .then((data) => {
-                // handle success
-                console.log(data);
                 swal("Deletado!", "A despesa foi deletada com sucesso!", "warning");
                 onRequestClose()
             })
             .catch((error) => {
-                // handle error
                 console.error(error);
             });
-        }
+    }
 
     return (
         <div className="w-full rounded-xl z-10 h-full fixed fixed bg-slate-600/50 top-0 left-0 align-center flex items-center justify-center">
@@ -151,7 +145,7 @@ const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, onRequestExclude,
                                     <div className='w-[100] h-[100] border-2 rounded-md mt-1 mb-2'>
                                         <CustomDatePicker onChange={handleDataChange} />
                                     </div> */}
-                            <DatePickerMui  onChange={handleDataChange} />
+                            <DatePickerMui onChange={handleDataChange} />
                         </form>
                     </div>
                     <div>
@@ -206,7 +200,7 @@ const ModalEdit: React.FC<ModalEditProps> = ({ onRequestClose, onRequestExclude,
                         >
                             Fechar
                         </button>
-                        
+
                     </div>
                 </div>
                 <div className="mt-4 space-y-4 flex flex-row">

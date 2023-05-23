@@ -25,7 +25,7 @@ const TotalValue = (props) => {
 
   useEffect(() => {
     getTotalValue();
-  }, []);
+  }, [userId, month]);
 
   return (
     <h1 className="text-4xl">

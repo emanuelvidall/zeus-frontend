@@ -12,7 +12,6 @@ const Barras = () => {
       try {
         const response = await fetch(`http://${myIp}:3001/todoscustos`);
         const json = await response.json();
-        console.log('RESPOSTA BARRRAAAAAAAA', json);
 
         const monthlyData = json.reduce((accumulator, item) => {
           const month = moment(item.data, 'DD-MM-YYYY').month();
@@ -28,8 +27,6 @@ const Barras = () => {
 
         const monthlyDataArray = Object.values(monthlyData);
         setData(monthlyDataArray);
-        console.log('monthlydatarray____________________', monthlyDataArray)
-        console.log(monthlyDataArray);
       } catch (error) {
         console.error('An error occurred', error);
       }
