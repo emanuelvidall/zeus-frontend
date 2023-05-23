@@ -5,16 +5,9 @@ import { useRouter } from 'next/router';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import swal from 'sweetalert';
-
 export const myIp = '172.18.9.236';
 
 export default function Login() {
-
-  interface Login {
-    email: string;
-    password: string;
-  }
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent} from '@mui/material' 
+import { FormControl, Select, MenuItem } from '@mui/material'
 
 export default function MainPage() {
   const [token, setToken] = useState('');
@@ -18,14 +18,14 @@ export default function MainPage() {
   const [userDog, setUserDog] = useState('');
   const [userId, setUserId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [month, setMonth] = useState(null);
+  const [month, setMonth] = useState(0);
 
   const router = useRouter();
-  
+
   const currentDate = new Date();
 
   const userCheck = async (userId) => {
-    try{
+    try {
       const response = await fetch(`http://172.18.9.236:3001/users/view/${userId}`, {
         method: GET,
         headers: {
@@ -35,12 +35,12 @@ export default function MainPage() {
           'Access-Control-Allow-Headers': 'Content-Type',
         },
       })
-      .then(response => response.json())
-      .then(data => {
-       if (data._id != userId){
-        router.push("/")
-       } 
-      })
+        .then(response => response.json())
+        .then(data => {
+          if (data._id != userId) {
+            router.push("/")
+          }
+        })
     } catch (error) {
       console.error('Error:', error);
     }
@@ -53,13 +53,13 @@ export default function MainPage() {
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     const storedId = localStorage.getItem('id');
-    if (storedToken ) {
+    if (storedToken) {
       setToken(storedToken);
       setUserId(storedId);
       getUserData(storedId);
       setIsLoading(false);
       userCheck(userId);
-      setMonth(currentDate.getMonth()+1);
+      setMonth(currentDate.getMonth() + 1);
     } else {
       router.push('/');
     }
@@ -98,54 +98,54 @@ export default function MainPage() {
     <main className='items-center flex justify-center h-screen'>
       <div className='bg-[#1e2229] drop-shadow-xl rounded-xl items-center flex justify-center pl-10 pr-10 h-[90%] w-[90%]'>
         <div className='leftSection bg-white h-[90%] w-1/6 mr-10 rounded-xl p-5 flex flex-col'>
-          
-            <div className='secaoUser flex flex-row justify-center'>
-              <div className='text-black mb-5 ml-2 flex flex-col items-center justify-center'>
-                <FontAwesomeIcon className='mb-2' icon={faUser} color='#1e2229' size='6x' />
-                <h1>Olá <span className='text-xl font-bold'>{userNameUpperCase(userName)}</span></h1>
-                <h1>{userEmail}</h1>
-              </div>
+
+          <div className='secaoUser flex flex-row justify-center'>
+            <div className='text-black mb-5 ml-2 flex flex-col items-center justify-center'>
+              <FontAwesomeIcon className='mb-2' icon={faUser} color='#1e2229' size='6x' />
+              <h1>Olá <span className='text-xl font-bold'>{userNameUpperCase(userName)}</span></h1>
+              <h1>{userEmail}</h1>
             </div>
-            <h1 className='text-black opacity-70 text-center'>🐶 Seu aumigo é:</h1>
-            <div className='secaoDog flex flex-col items-center justify-center'>
-              <h1 className='text-black text-3xl mt-5 mb-1'>{userNameUpperCase(userDog)}</h1>
-              <ImageComponent />
-            </div>
-            <div className='buttonDiv flex justify-center mt-80'>
-              <button type='button' onClick={() => logout()} className='w-[fit] self-center text-sm px-2 h-[30px] bg-[#DC3434] rounded-md text-white transition-all duration-500 ease-in-out hover:scale-110 hover:shadow-lg'>Encerrar Sessão</button>
-            </div>
-            <div className='listSection mt-20 text-neutral-500 text-2xl space-y-10 flex flex-col'>
-            </div>
-          
+          </div>
+          <h1 className='text-black opacity-70 text-center'>🐶 Seu aumigo é:</h1>
+          <div className='secaoDog flex flex-col items-center justify-center'>
+            <h1 className='text-black text-3xl mt-5 mb-1'>{userNameUpperCase(userDog)}</h1>
+            <ImageComponent />
+          </div>
+          <div className='buttonDiv flex justify-center mt-80'>
+            <button type='button' onClick={() => logout()} className='w-[fit] self-center text-sm px-2 h-[30px] bg-[#DC3434] rounded-md text-white transition-all duration-500 ease-in-out hover:scale-110 hover:shadow-lg'>Encerrar Sessão</button>
+          </div>
+          <div className='listSection mt-20 text-neutral-500 text-2xl space-y-10 flex flex-col'>
+          </div>
+
         </div>
         <div className='middleSection bg-white h-[90%] w-1/2 rounded-l-xl flex justify-center items-center p-10'>
           <div className='w-[95%] h-[100%]'>
             <CurrentDate />
             <div className='topContainer flex flex-row'>
               <h1 className='text-3xl'>Total de Despesas em <FormControl className='mt-0' sx={{ m: 1, minWidth: 120 }} size="small">
-                                                      <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        value={month}
-                                                        onChange={handleChange}
-                                                        defaultValue={month}
-                                                      >
-                                                        <MenuItem value={1}>Janeiro</MenuItem>
-                                                        <MenuItem value={2}>Fevereiro</MenuItem>
-                                                        <MenuItem value={3}>Marco</MenuItem>
-                                                        <MenuItem value={4}>Abril</MenuItem>
-                                                        <MenuItem value={5}>Maio</MenuItem>
-                                                        <MenuItem value={6}>Junho</MenuItem>
-                                                        <MenuItem value={7}>Julho</MenuItem>
-                                                        <MenuItem value={8}>Agosto</MenuItem>
-                                                        <MenuItem value={9}>Setembro</MenuItem>
-                                                        <MenuItem value={10}>Outubro</MenuItem>
-                                                        <MenuItem value={11}>Novembro</MenuItem>
-                                                        <MenuItem value={12}>Dezembro</MenuItem>
-                                                      </Select>
-                                                    </FormControl></h1>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={month}
+                  onChange={handleChange}
+                  defaultValue={month}
+                >
+                  <MenuItem value={1}>Janeiro</MenuItem>
+                  <MenuItem value={2}>Fevereiro</MenuItem>
+                  <MenuItem value={3}>Marco</MenuItem>
+                  <MenuItem value={4}>Abril</MenuItem>
+                  <MenuItem value={5}>Maio</MenuItem>
+                  <MenuItem value={6}>Junho</MenuItem>
+                  <MenuItem value={7}>Julho</MenuItem>
+                  <MenuItem value={8}>Agosto</MenuItem>
+                  <MenuItem value={9}>Setembro</MenuItem>
+                  <MenuItem value={10}>Outubro</MenuItem>
+                  <MenuItem value={11}>Novembro</MenuItem>
+                  <MenuItem value={12}>Dezembro</MenuItem>
+                </Select>
+              </FormControl></h1>
               <div className='totalMes flex-end ml-auto'>
-                {isLoading ? <h1>carregando</h1> : <TotalValue userId={userId} month={month} /> }
+                {isLoading ? <h1>carregando</h1> : <TotalValue userId={userId} month={month} />}
                 <h1 className='text-sm text-left'></h1>
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function MainPage() {
                 <ModalAdd userId={userId} />
               </div>
               <div className=''>
-                <List month={month}/>
+                <List userId={userId} month={month} />
               </div>
             </div>
           </div>

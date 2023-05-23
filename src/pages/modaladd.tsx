@@ -14,7 +14,7 @@ const ModalAdd = (props) => {
     const [value, setValue] = useState(0);
     const [quantity, setQuantity] = useState(0);
     const [month, setMonth] = useState(0);
-    
+
     const currentDate = new Date();
 
     const userId = props.userId;
@@ -29,7 +29,7 @@ const ModalAdd = (props) => {
             month: '2-digit',
             year: 'numeric',
         })
-        const formattedMonth = formattedDate.slice(3,5)
+        const formattedMonth = formattedDate.slice(3, 5)
         setDate(formattedDate.replace(/\//g, '-'))
         setMonth(formattedMonth)
     }
